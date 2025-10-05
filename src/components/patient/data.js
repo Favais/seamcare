@@ -23,26 +23,63 @@ export const patientsData = [
             zipCode: "100001",
             country: "Nigeria"
         },
-        emergencyContact: {
-            name: "Yusuf Bello",
-            relationship: "Brother",
-            phone: "+2348029876543"
-        },
+        emergencyContact: [
+            {
+                name: "Yusuf Bello",
+                relationship: "Brother",
+                phone: "+2348029876543",
+                email: "yusuf.bello@example.com"
+            }
+        ],
         insurance: {
             provider: "AXA Mansard",
             policyNumber: "AXA-NG-2023123456",
+            groupNumber: null,
+            copay: null,
+            deductible: null,
+            status: "Active",
             validTill: "2026-06-30"
         },
         medicalHistory: {
             conditions: ["Hypertension", "Asthma"],
-            allergies: ["Penicillin"],
+            allergies: [
+                { name: "Penicillin", severity: "Severe" }
+            ],
             medications: [
                 { name: "Lisinopril", dosage: "10mg", frequency: "Once daily" },
                 { name: "Ventolin Inhaler", dosage: "100mcg", frequency: "As needed" }
             ],
             surgeries: ["Appendectomy - 2010"],
-            familyHistory: ["Diabetes (Mother)", "Stroke (Grandfather)"]
+            familyHistory: ["Diabetes (Mother)", "Stroke (Grandfather)"],
+            treatmentHistory: [
+                {
+                    date: "2025-06-15",
+                    diagnosis: "Asthma exacerbation",
+                    treatment: "Nebulization, oral steroids",
+                    doctor: "Dr. Linda Eze",
+                    notes: "Patient responded well to nebulization. Advised to avoid triggers and follow up in 2 weeks."
+                },
+                {
+                    date: "2025-07-01",
+                    diagnosis: "Hypertension follow-up",
+                    treatment: "Medication adjustment",
+                    doctor: "Dr. Emeka Okafor",
+                    notes: "Blood pressure slightly elevated. Lisinopril dose increased. Monitor BP at home."
+                }
+            ]
         },
+        vitals:
+        {
+            date: "2025-07-01",
+            bloodPressure: "130/85",
+            heartRate: 78,
+            temperature: 36.8,
+            respiratoryRate: 18,
+            spo2: 98,
+            weight: 68,
+            height: 165
+        }
+        ,
         appointments: [
             {
                 appointmentId: "APT1001",
@@ -144,14 +181,21 @@ export const patientsData = [
             zipCode: "520001",
             country: "Nigeria"
         },
-        emergencyContact: {
-            name: "Grace Okon",
-            relationship: "Wife",
-            phone: "+2348169987766"
-        },
+        emergencyContact: [
+            {
+                name: "Grace Okon",
+                relationship: "Wife",
+                phone: "+2348169987766",
+                email: "grace.okon@example.com"
+            }
+        ],
         insurance: {
             provider: "Leadway Health",
             policyNumber: "LWH-9898753",
+            groupNumber: null,
+            copay: null,
+            deductible: null,
+            status: "Active",
             validTill: "2025-12-31"
         },
         medicalHistory: {
@@ -161,8 +205,29 @@ export const patientsData = [
                 { name: "Metformin", dosage: "500mg", frequency: "Twice daily" }
             ],
             surgeries: [],
-            familyHistory: ["Hypertension (Father)"]
+            familyHistory: ["Hypertension (Father)"],
+            treatmentHistory: [
+                {
+                    date: "2025-07-10",
+                    diagnosis: "Hyperglycemia",
+                    treatment: "Medication review, dietary advice",
+                    doctor: "Dr. Boma Nwachukwu",
+                    notes: "Patient advised to monitor blood sugar closely and adhere to dietary recommendations."
+                }
+            ]
         },
+        vitals: [
+            {
+                date: "2025-07-01",
+                bloodPressure: "140/90",
+                heartRate: 82,
+                temperature: 37.0,
+                respiratoryRate: 19,
+                spo2: 97,
+                weight: 85,
+                height: 178
+            }
+        ],
         appointments: [
             {
                 appointmentId: "APT1002",
@@ -204,18 +269,52 @@ export const patientsData = [
             zipCode: "900211",
             country: "Nigeria"
         },
-        emergencyContact: {
-            name: "Fatima Mohammed",
-            relationship: "Mother",
-            phone: "+2348023344556"
+        emergencyContact: [
+            {
+                name: "Fatima Mohammed",
+                relationship: "Mother",
+                phone: "+2348023344556",
+                email: "fatima.mohammed@example.com"
+            }
+        ],
+        insurance: {
+            provider: null,
+            policyNumber: null,
+            groupNumber: null,
+            copay: null,
+            deductible: null,
+            status: null,
+            validTill: null
         },
-        insurance: null,
         medicalHistory: {
             conditions: [],
-            allergies: ["Dust", "Seafood"],
+            allergies: [
+                { name: "Dust", severity: "Mild" },
+                { name: "Seafood", severity: "Moderate" }
+            ],
             medications: [],
             surgeries: [],
-            familyHistory: []
+            familyHistory: [],
+            treatmentHistory: [
+                {
+                    date: "2025-07-01",
+                    diagnosis: "Allergic rhinitis",
+                    treatment: "Antihistamines prescribed",
+                    doctor: "Dr. Musa Garba",
+                    notes: "Patient instructed to avoid allergens and use antihistamines as needed."
+                }
+            ]
+        },
+        vitals:
+        {
+            date: "2025-07-01",
+            bloodPressure: "110/70",
+            heartRate: 72,
+            temperature: 36.5,
+            respiratoryRate: 16,
+            spo2: 99,
+            weight: 60,
+            height: 160
         },
         appointments: [
             {
@@ -251,14 +350,21 @@ export const patientsData = [
             zipCode: "430001",
             country: "Nigeria"
         },
-        emergencyContact: {
-            name: "Ngozi Ifeanyi",
-            relationship: "Wife",
-            phone: "+2348021122334"
-        },
+        emergencyContact: [
+            {
+                name: "Ngozi Ifeanyi",
+                relationship: "Wife",
+                phone: "+2348021122334",
+                email: "ngozi.ifeanyi@example.com"
+            }
+        ],
         insurance: {
             provider: "NHIS",
             policyNumber: "NHIS-ANA-445599",
+            groupNumber: null,
+            copay: null,
+            deductible: null,
+            status: "Active",
             validTill: "2025-10-15"
         },
         medicalHistory: {
@@ -268,16 +374,35 @@ export const patientsData = [
                 { name: "Ibuprofen", dosage: "200mg", frequency: "Twice daily" }
             ],
             surgeries: [],
-            familyHistory: []
+            familyHistory: [],
+            treatmentHistory: [
+                {
+                    date: "2025-06-25",
+                    diagnosis: "Joint pain",
+                    treatment: "NSAIDs prescribed, physiotherapy advised",
+                    doctor: "Dr. Linda Eze",
+                    notes: "Patient to start physiotherapy sessions next week. Monitor pain and report any side effects."
+                }
+            ]
         },
+        vitals: [
+            {
+                date: "2025-06-25",
+                bloodPressure: "125/80",
+                heartRate: 75,
+                temperature: 36.6,
+                respiratoryRate: 17,
+                spo2: 98,
+                weight: 80,
+                height: 172
+            }
+        ],
         appointments: [],
         labResults: [],
         vaccinations: [],
         createdAt: "2023-09-05T10:00:00Z",
         updatedAt: "2025-06-25T09:45:00Z"
     },
-
-    // 6 more patients
     {
         patientNo: "P100238",
         firstName: "Funmi",
@@ -294,20 +419,53 @@ export const patientsData = [
             zipCode: "100212",
             country: "Nigeria"
         },
-        emergencyContact: {
-            name: "Tayo Adebayo",
-            relationship: "Sister",
-            phone: "+2348069998877"
+        emergencyContact: [
+            {
+                name: "Tayo Adebayo",
+                relationship: "Sister",
+                phone: "+2348069998877",
+                email: "tayo.adebayo@example.com"
+            }
+        ],
+        insurance: {
+            provider: "Blue Cross Blue Shield",
+            policyNumber: "ABC123456789",
+            groupNumber: "GRP001",
+            copay: "$25",
+            deductible: "$1,500",
+            status: "Active",
+            validTill: null
         },
-        insurance: null,
         medicalHistory: {
             conditions: ["Migraines"],
-            allergies: [],
+            allergies: [
+                { name: "None", severity: "Mild" }
+            ],
             medications: [
                 { name: "Paracetamol", dosage: "500mg", frequency: "As needed" }
             ],
             surgeries: [],
-            familyHistory: []
+            familyHistory: [],
+            treatmentHistory: [
+                {
+                    date: "2025-06-20",
+                    diagnosis: "Migraine attack",
+                    treatment: "Pain relief, rest advised",
+                    doctor: "Dr. Emeka Okafor",
+                    notes: "Patient advised to keep a headache diary and return if symptoms worsen."
+                }
+            ]
+        },
+        vitals:
+        {
+            date: "2025-07-01",
+            bloodPressure: "118/76",
+            heartRate: 70,
+            temperature: 36.4,
+            respiratoryRate: 16,
+            spo2: 99,
+            weight: 62,
+            height: 162
         },
         appointments: [],
         labResults: [],
@@ -333,23 +491,53 @@ export const patientsData = [
             zipCode: "700001",
             country: "Nigeria"
         },
-        emergencyContact: {
-            name: "Amina Salihu",
-            relationship: "Wife",
-            phone: "+2348133344555"
-        },
+        emergencyContact: [
+            {
+                name: "Amina Salihu",
+                relationship: "Wife",
+                phone: "+2348133344555",
+                email: "amina.salihu@example.com"
+            }
+        ],
         insurance: {
             provider: "Hygeia",
             policyNumber: "HYG-KN-998877",
-            validTill: "2025-09-01"
+            groupNumber: "GRP002",
+            copay: "$20",
+            deductible: "$1,000",
+            status: "Active",
+            validTill: null
         },
         medicalHistory: {
             conditions: [],
-            allergies: [],
+            allergies: [
+                { name: "None", severity: "Mild" }
+            ],
             medications: [],
             surgeries: [],
-            familyHistory: []
+            familyHistory: [],
+            treatmentHistory: [
+                {
+                    date: "2025-06-29",
+                    diagnosis: "General checkup",
+                    treatment: "No treatment required",
+                    doctor: "Dr. Musa Garba",
+                    notes: "Routine checkup. No issues found. Advised to maintain healthy lifestyle."
+                }
+            ]
         },
+        vitals: [
+            {
+                date: "2025-06-29",
+                bloodPressure: "122/78",
+                heartRate: 74,
+                temperature: 36.7,
+                respiratoryRate: 17,
+                spo2: 98,
+                weight: 77,
+                height: 175
+            }
+        ],
         appointments: [],
         labResults: [],
         vaccinations: [],

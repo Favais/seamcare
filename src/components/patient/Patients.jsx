@@ -53,7 +53,10 @@ const Patients = () => {
 
   if (currentView === 'view') {
     return (
-      <PatientDetails patient={patient} setCurrentView={setCurrentView} setSelectedPatient={setSelectedPatient} />
+      <PatientDetails
+        patient={patient}
+        setCurrentView={setCurrentView}
+        setSelectedPatient={setSelectedPatient} />
     )
   }
 

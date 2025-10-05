@@ -18,7 +18,7 @@ const navItems = [
     { label: 'Appointment', icon: <RiCalendarScheduleFill />, href: '/dashboard/appointment' },
     { label: 'Patients', icon: <FaUserInjured />, href: '/dashboard/patients' },
     { label: 'Schedule', icon: <SlCalender />, href: '/dashboard/schedule' },
-    { label: 'Documents', icon: <FaFileAlt />, href: '/documents' },
+    { label: 'Documents', icon: <FaFileAlt />, href: '/dashboard/documents' },
     { label: 'Messages', icon: <FaEnvelope />, href: '/messages', badge: 4 },
     { label: 'Medication', icon: <FaNotesMedical />, href: '/medication' },
     { label: 'Notification', icon: <FaBell />, href: '/notification', badge: 12 },

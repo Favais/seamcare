@@ -35,13 +35,13 @@ const Appointments = ({ globalFilter, setGlobalFilter }) => {
             </div>
             <div className=" text-gray-700">
                 <Table className={'border-none'}>
-                    <TableHeader className={'border-none'}>
+                    <TableHeader className={''}>
                         {
                             table.getHeaderGroups().map((headerGroup) => (
-                                <TableRow key={headerGroup.id} className={'border-none'}>
+                                <TableRow key={headerGroup.id} className={''}>
                                     {
                                         headerGroup.headers.map((header) => (
-                                            <TableHead key={header.id} className={'border-none'}>
+                                            <TableHead key={header.id} className={''}>
                                                 {
                                                     flexRender(header.column.columnDef.header, header.getContext())
 
@@ -56,7 +56,7 @@ const Appointments = ({ globalFilter, setGlobalFilter }) => {
                     <TableBody className='border-none'>
                         {
                             table.getRowModel().rows.map((rows) => (
-                                <TableRow className={'border-none'} key={rows.id}>
+                                <TableRow className={''} key={rows.id}>
                                     {
                                         rows.getVisibleCells().map((cell) => (
                                             <TableCell key={cell.id} className={'p-4'}>

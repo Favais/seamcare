@@ -1,0 +1,115 @@
+.fc-event {
+    background-color: var(--color-blue-50) !important;
+    color: black !important;
+    padding: 2px 6px;
+    border: 1px solid rgb(0, 0, 0) !important;
+    border-radius: 4px;
+    font-size: 0.7rem;
+}
+
+.fc .fc-toolbar-title {
+    color: #3B82F6;
+    font-size: 1.25rem;
+    font-weight: 00;
+}
+
+.fc .fc-button {
+    background-color: #3B82F6;
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.fc .fc-button:hover {
+    background-color: #2563eb;
+    /* indigo-600 */
+}
+
+/* Active (clicked) button */
+.fc .fc-button:active {
+    background-color: #1e40af;
+    /* indigo-900 */
+}
+
+.fc .fc-daygrid-day-top {
+    justify-content: flex-end !important;
+    padding-left: 0.5rem;
+    font-size: 12px;
+
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+    background-color: var(--color-blue-50);
+    /* Light blue */
+    border: 1px solid var(--color-blue-500);
+    /* Sky-400 */
+    border-radius: 6px;
+}
+
+.fc .fc-day-today .fc-daygrid-day-number {
+    color: #1d4ed8;
+    /* Blue-700 */
+    font-weight: 700;
+    background: #e0f2fe;
+    /* Light blue background */
+    border-radius: 50%;
+    padding: 4px 8px;
+}
+
+
+/* Ensure events don't push the cell taller */
+.fc .fc-daygrid-event-harness {
+    display: flex;
+    flex-wrap: wrap;
+    /* max-height: 40px; */
+    /* overflow: hidden; */
+}
+
+.fc-daygrid-day-events {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.fc .fc-event-title {
+    white-space: nowrap;
+    width: 80px;
+    /* default is nowrap */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* word-wrap: break-word; */
+    /* font-size: 0.85rem; */
+    line-height: 1.1rem;
+}
+
+.fc-daygrid-day {
+    /* height: 110px; */
+    /* width: 80px; */
+    /* overflow: hidden; */
+}
+
+.fc-daygrid-day-frame {
+    /* display: none; */
+    max-height: 100px;
+    width: auto;
+    /* adjust as needed */
+    overflow: hidden;
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+}
+
+
+/* Optional: spacing between weeks */
+.fc .fc-scrollgrid-sync-table {
+    /* border-spacing: 4px; */
+    /* border-collapse: separate; */
+    /* padding-right: 20px; */
+}
+
+/* Add outer gap around the whole grid */
+.fc-daygrid-body {
+    /* padding: 10px; */
+    background-color: #ffffff;
+}

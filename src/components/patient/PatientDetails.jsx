@@ -6,6 +6,8 @@ import { FaRegEdit } from "react-icons/fa";
 import { BsCalendar } from "react-icons/bs";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
 import AppointmentsTable from './AppointmentsTable';
+import MedicalRecord from './MedicalRecord';
+import Contact from './Contact';
 
 
 
@@ -37,7 +39,10 @@ const PatientDetails = ({ setCurrentView, setSelectedPatient, patient }) => {
                     <Button><BsCalendar />Schedule Appointment</Button>
                 </div>
             </div>
-            <PatientProfile patient={patient} />
+            <PatientProfile
+                patient={patient}
+                MedicalRecord={patient.medicalHistory.allergies}
+            />
             <Tabs className='py-3' value={activeTab} onValueChange={setActiveTab}>
                 <TabsList className='grid grid-cols-4 w-full bg-white'>
                     <TabsTrigger className='data-[state=active]:bg-blue-500 data-[state=active]:text-white rounded-md' value='overview'>Overview</TabsTrigger>
@@ -51,6 +56,16 @@ const PatientDetails = ({ setCurrentView, setSelectedPatient, patient }) => {
                 </TabsContent>
                 <TabsContent value={'appointments'}>
                     <AppointmentsTable appointments={patient.appointments} title={'Appoinment Hisory'} pages={12} />
+                </TabsContent>
+                <TabsContent value={'medical'}>
+                    <MedicalRecord
+                        MedicalRecord={patient.medicalHistory}
+                        vitals={patient.vitals}
+                        vaccinations={patient.vaccinations}
+                    />
+                </TabsContent>
+                <TabsContent value={'contact'}>
+                    <Contact emergencyContacts={patient.emergencyContact} insurance={patient.insurance} />
                 </TabsContent>
             </Tabs>
 
