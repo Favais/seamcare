@@ -2,6 +2,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 import Sidebar from "../../../components/sidebar";
+import { Toaster } from "sonner";
 
 
 
@@ -17,6 +18,7 @@ export default function DashboardLayout({ children }) {
             <main className="bg-neutral-100 flex-1 h-screen overflow-auto rounded-2xl">
                 {children}
             </main>
+            <Toaster position="top-center" />
         </div>
     );
 }

@@ -14,15 +14,15 @@ import { CgProfile } from "react-icons/cg";
 
 
 const navItems = [
-    { label: 'Overview', icon: <IoGrid />, href: '/dashboard' },
-    { label: 'Appointment', icon: <RiCalendarScheduleFill />, href: '/dashboard/appointment' },
-    { label: 'Patients', icon: <FaUserInjured />, href: '/dashboard/patients' },
-    { label: 'Schedule', icon: <SlCalender />, href: '/dashboard/schedule' },
-    { label: 'Documents', icon: <FaFileAlt />, href: '/dashboard/documents' },
-    { label: 'Messages', icon: <FaEnvelope />, href: '/messages', badge: 4 },
-    { label: 'Medication', icon: <FaNotesMedical />, href: '/medication' },
-    { label: 'Notification', icon: <FaBell />, href: '/notification', badge: 12 },
-    { label: 'Settings', icon: <FaCog />, href: '/settings' },
+    { label: 'Overview', icon: <IoGrid />, href: '/doctor' },
+    { label: 'Appointment', icon: <RiCalendarScheduleFill />, href: '/doctor/appointment' },
+    { label: 'Patients', icon: <FaUserInjured />, href: '/doctor/patients' },
+    { label: 'Schedule', icon: <SlCalender />, href: '/doctor/schedule' },
+    { label: 'Documents', icon: <FaFileAlt />, href: '/doctor/documents' },
+    // { label: 'Messages', icon: <FaEnvelope />, href: '/messages', badge: 4 },
+    { label: 'Medication', icon: <FaNotesMedical />, href: '/doctor/prescriptions' },
+    { label: 'Notification', icon: <FaBell />, href: '/doctor/notification', badge: 12 },
+    { label: 'Settings', icon: <FaCog />, href: '/doctor/settings' },
 ];
 
 export default function Sidebar() {

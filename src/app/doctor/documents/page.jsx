@@ -1,12 +1,15 @@
+"use client"
+import { DocumentTable } from '@/components/documents/Documents'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import UploadDoc from '@/components/UploadDoc'
 import { Bell, Search, Settings } from 'lucide-react'
 import React from 'react'
 
 const page = () => {
     return (
-        <div className='py-3 px-4'>
+        <div className='py-3 px-4 flex flex-col'>
             <header className="bg-white border-b border-gray-200 px-6 py-4">
                 <div className="flex items-center justify-between">
                     {/* Left side - Title */}
@@ -48,6 +51,10 @@ const page = () => {
                     </div>
                 </div>
             </header>
+            <div>
+                <UploadDoc />
+            </div>
+            <DocumentTable />
         </div>
     )
 }
