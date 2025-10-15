@@ -27,7 +27,7 @@ const Features = () => {
                                 <p className='font-medium text-neutral-500'>Easily schedule consultations and meetings with healthcare professionals through our user-friendly online booking platform.</p>
                             </div>
                         </div>
-                        <Image className='' src={Mobile} />
+                        <Image className='' src={Mobile} alt='mobile-img' />
                     </div>
                     <div className='flex gap-2'>
                         <div className='flex flex-col px-6 py-10 gap-6 bg-neutral-100 rounded-2xl'>
@@ -58,7 +58,7 @@ const Features = () => {
                         <p className='text-2xl'>Secure Virtual Meeting</p>
                         <p>Experience secure and convenient virtual consultations from home. Our encrypted video conferencing guarantees confidential interactions, removing the need for in-person visits.</p>
                     </div>
-                    <Image width={300} src={iPhone} />
+                    <Image width={300} src={iPhone} alt='iPhone-img' />
                 </div>
             </div>
         </div>

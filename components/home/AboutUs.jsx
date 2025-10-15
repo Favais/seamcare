@@ -6,7 +6,7 @@ import Image from 'next/image'
 const AboutUs = () => {
     return (
         <div className='flex gap-6 py-10 px-14'>
-            <Image src={aboutImg} />
+            <Image src={aboutImg} alt='about-img' />
             <div className='flex flex-col gap-10'>
                 <div className='px-6 py-2 items-center gap-4 flex bg-blue-100 rounded-full w-fit'>
                     <FaStar className='text-blue-500' />

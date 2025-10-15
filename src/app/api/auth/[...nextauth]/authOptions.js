@@ -22,7 +22,12 @@ export const authOptions = {
                 if (!isValid) {
                     throw new Error("Invalid password");
                 }
-                return { email: user.email, name: user.name, role: user.role };
+                return {
+                    email: user.email,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    role: user.role
+                };
             },
         })
 
@@ -30,6 +35,29 @@ export const authOptions = {
     session: { strategy: "jwt" },
     secret: process.env.NEXTAUTH_SECRET,
     pages: {
-        // signIn: '/auth/signin',
+        signIn: '/login',
     },
+    callbacks: {
+        async jwt({ token, user }) {
+            // When user logs in, merge their info into the token
+            if (user) {
+                token.id = user.id;
+                token.role = user.role;
+                token.firstName = user.firstName;
+                token.lastName = user.lastName;
+            }
+            return token;
+        },
+
+        async session({ session, token }) {
+            // Make all token info available in the session
+            if (token) {
+                session.user.id = token.id;
+                session.user.role = token.role;
+                session.user.firstName = token.firstName;
+                session.user.lastName = token.lastName;
+            }
+            return session;
+        }
+    }
 };

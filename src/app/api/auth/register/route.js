@@ -8,7 +8,7 @@ connectDB();
 export const POST = async (request) => {
     try {
 
-        const { email, password, role, firstName, lastName } = await request.json();
+        const { email, password, role, firstName, lastName, } = await request.json();
 
 
         if (!email || !password || !role || !firstName || !lastName) {

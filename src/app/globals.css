@@ -6,6 +6,7 @@
 :root {
   --font-inter: 'Inter', sans-serif;
   --font-circular-std: 'Circular Std', sans-serif;
+  --font-poppins: 'Poppins', sans-serif;
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -80,12 +81,12 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-.font-montserrat {
-  font-family: var(--font-montserrat);
+.font-inter {
+  font-family: var(--font-inter);
 }
 
-.font-circular {
-  font-family: var(--font-circular-std);
+.font-poppins {
+  font-family: var(--font-poppins);
 }
 
 body {

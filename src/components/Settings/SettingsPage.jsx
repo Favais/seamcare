@@ -9,22 +9,21 @@ import { Label } from "../ui/label";
 import { Switch } from "../ui/switch";
 import { Separator } from "../ui/separator";
 import { toast } from "sonner";
+import { useAppContext } from "@/context/AppContext";
 
 export function SettingsPage() {
+
     const [theme, setTheme] = useState("light");
     const [emailNotifications, setEmailNotifications] = useState(true);
     const [smsNotifications, setSmsNotifications] = useState(false);
     const [pushNotifications, setPushNotifications] = useState(true);
+    const { session } = useAppContext();
 
     // Account Info State
-    const [accountInfo, setAccountInfo] = useState({
-        firstName: "Sarah",
-        lastName: "Wilson",
-        email: "sarah.wilson@hospital.com",
-        phone: "+1 (555) 123-4567",
-        specialty: "Internal Medicine",
-        licenseNumber: "MD-123456"
-    });
+    // const [accountInfo, setAccountInfo] = useState({
+    //     ...session?.user
+    // });
+    console.log(accountInfo);
 
     // Password State
     const [passwords, setPasswords] = useState({

@@ -10,6 +10,9 @@ import logo from '../public/seamlogo.png'
 import { IoGrid } from 'react-icons/io5';
 import { RiCalendarScheduleFill } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
+import { signOut } from 'next-auth/react';
+import { useSession } from "next-auth/react";
+
 
 
 
@@ -27,6 +30,7 @@ const navItems = [
 
 export default function Sidebar() {
     const pathname = usePathname();
+    const { data: session, loading } = useSession();
 
     return (
         <aside className="w-[260px] min-h-screen bg-white p-4 flex flex-col justify-between">
@@ -65,9 +69,10 @@ export default function Sidebar() {
             <div className="flex items-center gap-3 mt-10 p-2 border-t pt-4">
                 {/* <CgProfile className="w-10 h-10 rounded-full object-cover" /> */}
                 <div className="text-sm">
-                    <p className="font-semibold">Dr James Martin</p>
+                    <p className="font-semibold">{session?.user.firstName} {session?.user.lastName}</p>
                     <p className="text-gray-500 text-xs">Cardiac Surgeon</p>
                 </div>
+                <HiOutlineLogout onClick={() => signOut({ callbackUrl: "/login" })} className="ml-auto text-gray-500 w-6 h-6 cursor-pointer hover:text-red-500" />
             </div>
         </aside>
     );

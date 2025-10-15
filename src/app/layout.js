@@ -1,29 +1,25 @@
-
-import { Geist, Geist_Mono } from "next/font/google";
+"use client";
+import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
+import { SessionProvider } from "next-auth/react";
+import { AppWrapper } from "@/context/AppContext";
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const poppins = Poppins({ subsets: ["latin"], variable: "--font-poppins", weight: ["400", "700"] });
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export const metadata = {
-  title: "Seam Care",
-  description: "Book appoinment and manage patients",
-};
+// export const metadata = {
+//   title: "Seam Care",
+//   description: "Book appoinment and manage patients",
+// };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={`${inter.variable} ${poppins.variable} antialiased`}>
+        <SessionProvider>
+          <AppWrapper>
+            {children}
+          </AppWrapper>
+        </SessionProvider>
       </body>
     </html>
   );
