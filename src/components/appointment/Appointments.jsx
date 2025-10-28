@@ -3,15 +3,17 @@ import React, { useState } from 'react'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../ui/table';
 import { useReactTable, flexRender, getCoreRowModel, getSortedRowModel, getPaginationRowModel, getFilteredRowModel } from '@tanstack/react-table';
 import { columns, data } from './data';
+import { useAppContext } from '@/context/AppContext';
 
 const Appointments = ({ globalFilter, setGlobalFilter }) => {
+    const { appointments } = useAppContext()
     const [sorting, setSorting] = useState([])
     const [pagination, setPagination] = useState({
         pageIndex: 0,
         pageSize: 10,
     })
     const table = useReactTable({
-        data,
+        data: appointments,
         columns,
         getCoreRowModel: getCoreRowModel(),
         getFilteredRowModel: getFilteredRowModel(),

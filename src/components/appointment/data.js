@@ -1,9 +1,12 @@
 import { TiArrowSortedDown } from "react-icons/ti";
 import { TiArrowSortedUp } from "react-icons/ti";
+import { Button } from "../ui/button";
+import { MoreVerticalIcon } from "lucide-react";
+import { ActionMenu } from "./ActionMenu";
 
 export const columns = [
     {
-        accessorKey: "visitNo",
+        accessorKey: "visitorId",
         header: ({ column }) => (
             <button className='flex gap-2 p-3 items-center' onClick={() => column.toggleSorting()}>
                 Visit No
@@ -12,7 +15,7 @@ export const columns = [
         ),
     },
     {
-        accessorKey: "patientNo",
+        accessorKey: "patientId",
         header: ({ column }) => (
             <button className='flex gap-2 items-center' onClick={() => column.toggleSorting()}>
                 Patient Number
@@ -39,7 +42,7 @@ export const columns = [
         ),
     },
     {
-        accessorKey: "dateOfVisit",
+        accessorKey: "date",
         header: ({ column }) => (
             <button className='flex gap-2 items-center' onClick={() => column.toggleSorting()}>
                 Date of visit
@@ -48,7 +51,7 @@ export const columns = [
         ),
     },
     {
-        accessorKey: "timeOfVisit",
+        accessorKey: "time",
         header: ({ column }) => (
             <button className='flex gap-2 items-center' onClick={() => column.toggleSorting()}>
                 Time of visit
@@ -57,7 +60,7 @@ export const columns = [
         ),
     },
     {
-        accessorKey: "Reason",
+        accessorKey: "reason",
         header: ({ column }) => (
             <button className='flex gap-2 items-center' onClick={() => column.toggleSorting()}>
                 Reason
@@ -66,9 +69,9 @@ export const columns = [
         ),
     },
     {
-        accessorKey: "Action",
-        enableGlobalFilter: false,
-        header: 'Action'
+        header: 'Action',
+        id: "actions",
+        cell: ({ row }) => <ActionMenu row={row.original} />,
     },
 
 ];

@@ -1,5 +1,5 @@
 import React from 'react'
-import aboutImg from '../../public/aboutImg.svg'
+import aboutImg from '../../../public/aboutImg.svg'
 import { FaStar } from 'react-icons/fa'
 import Image from 'next/image'
 

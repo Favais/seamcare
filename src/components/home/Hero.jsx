@@ -1,7 +1,7 @@
 import React from 'react'
 import { FaStar, FaArrowRight } from "react-icons/fa";
-import heroImg from '../../public/hero.svg'
-import users from '../../public/Users.svg'
+import heroImg from '../../../public/hero.svg'
+import users from '../../../public/Users.svg'
 import Image from 'next/image';
 
 const Hero = () => {

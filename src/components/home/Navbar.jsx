@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import logo from '../../public/seamlogo.png'
+import logo from '../../../public/seamlogo.png'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 

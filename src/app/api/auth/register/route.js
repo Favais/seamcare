@@ -8,7 +8,18 @@ connectDB();
 export const POST = async (request) => {
     try {
 
-        const { email, password, role, firstName, lastName, } = await request.json();
+        const { email,
+            password,
+            role,
+            firstName,
+            lastName,
+            specialization,
+            experience,
+            hospital,
+            bloodGroup,
+            medicalHistory,
+            allergies
+        } = await request.json();
 
 
         if (!email || !password || !role || !firstName || !lastName) {
@@ -27,15 +38,34 @@ export const POST = async (request) => {
             password: hashedPassword,
             role,
             firstName,
-            lastName
+            lastName,
+            gender
         });
 
         await newUser.save();
 
+        const genPatientNumber = () => {
+            const prefix = "SMC"
+            const timestamp = new Date().toISOString().slice(0, 10).replace(/-/g, "")
+            const randomPart = Math.random().toString(36).substring(2, 7).toUpperCase()
+            return `${prefix}-${timestamp}-${randomPart}`
+        }
+
         if (role === "patient") {
-            await PatientProfile.create({ userId: newUser._id });
+            await PatientProfile.create({
+                userId: newUser._id,
+                patientId: genPatientNumber(),
+                bloodGroup,
+                medicalHistory,
+                allergies
+            });
         } else if (role === "doctor") {
-            await DoctorProfile.create({ userId: newUser._id });
+            await DoctorProfile.create({
+                userId: newUser._id,
+                specialization,
+                experience,
+                hospital
+            });
         }
 
         return NextResponse.json({ message: "User registered successfully" }, { status: 201 });

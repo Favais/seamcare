@@ -6,12 +6,11 @@ import { FaCalendarAlt, FaUserInjured, FaClock, FaFileAlt, FaCog, FaBell, FaEnve
 import { SlCalender } from "react-icons/sl";
 import { HiOutlineLogout } from 'react-icons/hi';
 import Image from 'next/image';
-import logo from '../public/seamlogo.png'
+import logo from '../../public/seamlogo.png'
 import { IoGrid } from 'react-icons/io5';
 import { RiCalendarScheduleFill } from "react-icons/ri";
-import { CgProfile } from "react-icons/cg";
 import { signOut } from 'next-auth/react';
-import { useSession } from "next-auth/react";
+import { useAppContext } from '@/context/AppContext';
 
 
 
@@ -30,8 +29,8 @@ const navItems = [
 
 export default function Sidebar() {
     const pathname = usePathname();
-    const { data: session, loading } = useSession();
 
+    const { session } = useAppContext();
     return (
         <aside className="w-[260px] min-h-screen bg-white p-4 flex flex-col justify-between">
             {/* Logo */}
@@ -70,7 +69,7 @@ export default function Sidebar() {
                 {/* <CgProfile className="w-10 h-10 rounded-full object-cover" /> */}
                 <div className="text-sm">
                     <p className="font-semibold">{session?.user.firstName} {session?.user.lastName}</p>
-                    <p className="text-gray-500 text-xs">Cardiac Surgeon</p>
+                    <p className="text-gray-500 text-xs">{ }</p>
                 </div>
                 <HiOutlineLogout onClick={() => signOut({ callbackUrl: "/login" })} className="ml-auto text-gray-500 w-6 h-6 cursor-pointer hover:text-red-500" />
             </div>

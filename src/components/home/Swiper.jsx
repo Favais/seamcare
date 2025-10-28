@@ -6,7 +6,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import { swiperData } from '../../assets/swiper/swiperData';
+import { swiperData } from '../../../assets/swiper/swiperData';
 import { FaCaretRight } from "react-icons/fa";
 import { FaArrowCircleRight } from "react-icons/fa";
 import { FaArrowCircleLeft } from "react-icons/fa";

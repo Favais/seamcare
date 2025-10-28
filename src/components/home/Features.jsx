@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
-import Mobile from '../../public/Mobile.svg'
-import iPhone from '../../public/iPhone.svg'
+import Mobile from '../../../public/Mobile.svg'
+import iPhone from '../../../public/iPhone.svg'
 import { SlCalender } from "react-icons/sl";
 import { MdOutlineContactPhone } from "react-icons/md";
 import { IoDocuments } from "react-icons/io5";

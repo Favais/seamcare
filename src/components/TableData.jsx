@@ -4,18 +4,24 @@ import { Box, Typography } from '@mui/material';
 import { DataGrid, GridActionsCellItem, renderActionsCell } from '@mui/x-data-grid';
 import { red } from '@mui/material/colors';
 import { Button } from "@/components/ui/button"
+import { useAppContext } from '@/context/AppContext';
+import { ActivityIcon, Eye, MoreVertical } from 'lucide-react';
 
 
 const TableData = () => {
+
+    const { appointments, loading } = useAppContext()
+    // console.log(appointments);
+
     const columns = [
-        { field: 'id', headerName: 'Visit No.', width: 90 },
+        { field: 'visitorId', headerName: 'Visit No.', width: 90 },
         {
             field: 'patientName',
             headerName: 'Patient Name',
             description: 'This column has a value getter and is not sortable.',
             sortable: false,
             width: 160,
-            valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
+            // valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
         },
         {
             field: 'gender',
@@ -34,8 +40,10 @@ const TableData = () => {
             headerName: 'Action',
             type: 'actions',
             renderCell: (params) => (
-                <div className='p-3'>
-                    <button className='px-4 py-2 bg-neutral-100 rounded hover:bg-neutral-700 hover:text-white'>Consolt</button>
+                <div className=''>
+                    <Button variant='outline' className=''>
+                        <MoreVertical />
+                    </Button>
                 </div>
             ),
             width: 110,
@@ -63,8 +71,9 @@ const TableData = () => {
                 <DataGrid
                     className="px-4 
                     [&_.MuiDataGrid-virtualScrollerContent]:!border-0"
-                    rows={rows}
+                    rows={appointments}
                     columns={columns}
+                    loading={loading}
                     initialState={{
                         pagination: {
                             paginationModel: {

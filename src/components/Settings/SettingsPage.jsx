@@ -17,13 +17,17 @@ export function SettingsPage() {
     const [emailNotifications, setEmailNotifications] = useState(true);
     const [smsNotifications, setSmsNotifications] = useState(false);
     const [pushNotifications, setPushNotifications] = useState(true);
-    const { session } = useAppContext();
+    const { session, doctorProfiles } = useAppContext();
+
 
     // Account Info State
-    // const [accountInfo, setAccountInfo] = useState({
-    //     ...session?.user
-    // });
-    console.log(accountInfo);
+    const [accountInfo, setAccountInfo] = useState({
+        ...session?.user,
+        ...doctorProfiles
+    });
+    console.log(session);
+    console.log(doctorProfiles);
+
 
     // Password State
     const [passwords, setPasswords] = useState({
@@ -149,7 +153,7 @@ export function SettingsPage() {
                                     <Label htmlFor="specialty">Medical Specialty</Label>
                                     <Input
                                         id="specialty"
-                                        value={accountInfo.specialty}
+                                        value={accountInfo.specialization}
                                         onChange={(e) => setAccountInfo({ ...accountInfo, specialty: e.target.value })}
                                     />
                                 </div>

@@ -1,20 +1,62 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
+import axios from "axios";
 
 
 const AppContext = createContext();
 
 export const AppWrapper = ({ children }) => {
+    const [doctorProfiles, setDoctorProfiles] = useState(null);
+    const [appointments, setAppointments] = useState({})
+    const [loading, setLoading] = useState(false)
     const { data: session } = useSession();
 
+    const user = {
+        userId: session?.user?.id,
+        firstName: session?.user?.firstName,
+        lastName: session?.user?.lastName,
+        email: session?.user?.email,
+        role: session?.user?.role,
 
+    }
+
+    const getAppointments = async () => {
+        try {
+            if (session && user?.role === "doctor") {
+                const res = await axios.post('/api/doctors/appointments', { userId: user.userId })
+                setAppointments(res.data.appointments)
+            }
+        } catch (error) {
+            console.log(error);
+
+        }
+
+    }
+
+    useEffect(() => {
+        if (session && user?.role === "doctor") {
+            const fetchDoctorProfiles = async () => {
+                setLoading(true)
+                const response = await axios.get(`/api/doctors`);
+                setDoctorProfiles(response.data);
+                setLoading(false)
+            }
+            fetchDoctorProfiles();
+        }
+    }, [session]);
+
+    useEffect(() => {
+        getAppointments()
+    }, [session])
 
     const value = {
-        session
+        session,
+        user,
+        doctorProfiles,
+        appointments, loading, setLoading
     }
     return (
-        <AppContext.Provider value={{ value }}>
+        <AppContext.Provider value={value}>
             {children}
         </AppContext.Provider>
     );

@@ -2,6 +2,7 @@ import mongoose, { Schema, models } from "mongoose";
 
 const PatientProfileSchema = new Schema({
     userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    patientId: { type: String, required: true },
     bloodGroup: String,
     allergies: [String],
     medicalHistory: [String],
