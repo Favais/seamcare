@@ -8,6 +8,7 @@ const AppContext = createContext();
 export const AppWrapper = ({ children }) => {
     const [doctorProfiles, setDoctorProfiles] = useState(null);
     const [appointments, setAppointments] = useState({})
+    const [patients, setPatients] = useState({})
     const [loading, setLoading] = useState(false)
     const { data: session } = useSession();
 
@@ -33,6 +34,18 @@ export const AppWrapper = ({ children }) => {
 
     }
 
+    const getPatients = async () => {
+        try {
+            if (session && user?.role === "doctor") {
+                const res = await axios.get('/api/doctors/patients')
+                setPatients(res.data.patientsinfo)
+            }
+        } catch (error) {
+            console.log(error);
+
+        }
+    }
+
     useEffect(() => {
         if (session && user?.role === "doctor") {
             const fetchDoctorProfiles = async () => {
@@ -47,13 +60,14 @@ export const AppWrapper = ({ children }) => {
 
     useEffect(() => {
         getAppointments()
+        getPatients()
     }, [session])
 
     const value = {
         session,
         user,
         doctorProfiles,
-        appointments, loading, setLoading
+        appointments, loading, setLoading, patients
     }
     return (
         <AppContext.Provider value={value}>

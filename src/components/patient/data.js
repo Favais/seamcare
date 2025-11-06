@@ -550,7 +550,7 @@ export const patientsData = [
 export const columns = ({ onViewPatient }) => [
     {
         id: 'patient',
-        accessorFn: row => `${row.firstName} ${row.lastName}`,
+        accessorFn: row => `${row.userInfo.firstName} ${row.userInfo.lastName}`,
         header: ({ column }) => (
             <button className='flex gap-2 items-center' onClick={() => column.toggleSorting()}>
                 Patient
@@ -569,7 +569,7 @@ export const columns = ({ onViewPatient }) => [
         ),
         cell: ({ row }) => {
             return (
-                <p className="p-0.5 w-fit rounded bg-neutral-200">{row.original.patientNo}</p>
+                <p className="p-0.5 w-fit rounded bg-neutral-200">{row.original.patientProfileInfo.patientId}</p>
             )
         }
     },
@@ -581,8 +581,8 @@ export const columns = ({ onViewPatient }) => [
             return (
                 <div>
                     <p>{row.original.age} years</p>
-                    <p className="text-xs text-neutral-500">{row.original.gender}</p>
-                </div>
+                    <p className="text-xs text-neutral-500">{row.original.userInfo.gender}</p>
+                </ div>
             )
         }
     },
@@ -590,7 +590,7 @@ export const columns = ({ onViewPatient }) => [
         accessorKey: "contact",
         header: 'Contact',
         cell: ({ row }) => {
-            const { email, phone } = row.original
+            const { email, phone } = row.original.userInfo;
             return (
                 <div>
                     <p className="flex items-center gap-1"><CiMail />{email}</p>

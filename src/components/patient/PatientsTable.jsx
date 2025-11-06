@@ -7,8 +7,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table'
 import { patientsData, columns as getColumns } from './data'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../ui/table'
+import { useAppContext } from '@/context/AppContext'
 
 const PatientsTable = ({ handleViewPatient }) => {
+    const { patients } = useAppContext();
     const [statusFilter, setStatusFilter] = useState('')
     const [sorting, setSorting] = useState([])
     const [globalFilter, setGlobalFilter] = useState('')
@@ -16,7 +18,7 @@ const PatientsTable = ({ handleViewPatient }) => {
     const columns = getColumns({ onViewPatient: handleViewPatient });
 
     const table = useReactTable({
-        data: patientsData,
+        data: patients || [],
         columns,
         getCoreRowModel: getCoreRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
