@@ -1,8 +1,8 @@
 .fc-event {
-    background-color: var(--color-blue-50) !important;
+    background-color: var(--color-white) !important;
     color: black !important;
-    padding: 2px 6px;
-    border: 1px solid rgb(0, 0, 0) !important;
+    padding: 2px;
+    border: 1px solid #cecece !important;
     border-radius: 4px;
     font-size: 0.7rem;
 }

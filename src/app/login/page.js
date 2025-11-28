@@ -8,21 +8,29 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [medicalLicenseNumber, setMedicalLicenseNumber] = useState('');
-
-
+    const [error, setError] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const res = await signIn('credentials', {
-                redirect: true,
+                redirect: false,
                 email,
                 password,
+                role,
                 medicalLicenseNumber: role === 'doctor' ? medicalLicenseNumber : undefined,
                 callbackUrl: role === 'doctor' ? '/doctor' : '/patient'
             });
+
+            if (res.error) {
+                setError(res.error);
+                return;
+            }
+
+            window.location.href = role === "doctor" ? "/doctor" : "/patient";
         } catch (error) {
             console.error("Error signing in:", error);
+            setError("Something went wrong.");
         }
     }
 
@@ -46,6 +54,9 @@ const Login = () => {
                         <button onClick={() => setRole('patient')} className={`py-3 px-8 ${role === 'patient' ? 'bg-blue-500 text-white' : 'bg-white text-blue-500'} font-poppins rounded-full border border-blue-500 hover:bg-blue-600`}>Patient</button>
                         <button onClick={() => setRole('doctor')} className={`py-3 px-8 ${role === 'doctor' ? 'bg-blue-500 text-white' : 'bg-white text-blue-500'} font-poppins rounded-full border border-blue-500 hover:bg-blue-600`}>Doctor</button>
                     </div>
+
+                    {error && <p className="text-red-500 mb-2">{error}</p>}
+
                     <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
                         <input type='' value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Email' className='p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500' />
                         <input type='password' value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Password' className='p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500' />

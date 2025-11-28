@@ -11,7 +11,7 @@ import { Badge } from '../ui/badge';
 
 const PatientProfile = ({ patient, MedicalRecord }) => {
 
-    const { firstName, lastName } = patient
+    const { firstName, lastName } = patient.userInfo
     const initals = firstName[0] + lastName[0]
     return (
         <div className='mt-3'>
@@ -27,19 +27,19 @@ const PatientProfile = ({ patient, MedicalRecord }) => {
                             <div className='grid grid-cols-2'>
                                 <div className='flex flex-col gap-2'>
                                     <CardTitle className='text-xl font-medium'>{`${firstName} ${lastName}`}</CardTitle>
-                                    <p className='text-muted-foreground'>Patient ID: {patient.patientNo}</p>
+                                    <p className='text-muted-foreground'>Patient ID: {patient.patientProfileInfo.patientNumber}</p>
                                 </div>
-                                {MedicalRecord.length > 0 && (
+                                {patient.patientProfileInfo.medicalHistory.allergies.length > 0 && (
                                     <Alert className='bg-red-50 border-red-200 p-2'>
                                         <GoAlert className='text-red-600' />
                                         <AlertDescription className='flex '>
                                             <span className="text-red-800">Allergies on file:</span>
                                             <div className='flex flex-wrap gap-2 mt-'>
-                                                {MedicalRecord.map((allergy) => (
-                                                    <Badge variant={`${allergy.severity === 'Severe' ? 'destructive' : allergy.severity === 'Moderate' ? 'default' : 'secondary'}`}>
+                                                {patient.patientProfileInfo.medicalHistory.allergies.map((allergy) => {
+                                                    return <Badge key={allergy._id} variant={`${allergy.severity === 'Severe' ? 'destructive' : allergy.severity === 'Moderate' ? 'default' : 'secondary'}`}>
                                                         {`${allergy.name}  (${allergy.severity})`}
                                                     </Badge>
-                                                ))}
+                                                })}
                                             </div>
                                         </AlertDescription>
                                     </Alert>
@@ -49,22 +49,23 @@ const PatientProfile = ({ patient, MedicalRecord }) => {
                             <div className='grid grid-cols-2 gap-4'>
                                 <div className='flex items-center gap-2 text-sm'>
                                     <SlCalender className='text-muted-foreground' />
-                                    <span >{`Age: ${patient.age} (${new Date(patient.dateOfBirth).toLocaleDateString()})`}</span>
+                                    <span >{`Age: ${new Date().getFullYear() - new Date(patient.userInfo.dateOfBirth).getFullYear()}
+                                (${new Date(patient.userInfo.dateOfBirth).toLocaleDateString()})`}</span>
                                 </div>
                                 <div className='text-sm'>
-                                    <span>Gender: {patient.gender}</span>
+                                    <span>Gender: {patient.userInfo.gender}</span>
                                 </div>
                                 <div className="flex items-center space-x-2 text-sm">
                                     <MdOutlineLocalPhone className="h-4 w-4 text-muted-foreground" />
-                                    <span>{patient.phone}</span>
+                                    <span>{patient.userInfo.phone}</span>
                                 </div>
                                 <div className="flex items-center space-x-2 text-sm">
                                     <CiMail className="h-4 w-4 text-muted-foreground" />
-                                    <span>{patient.email}</span>
+                                    <span>{patient.userInfo.email}</span>
                                 </div>
                                 <div className="flex items-center text-sm">
                                     <CiMapPin className="h-4 w-4 text-muted-foreground" />
-                                    <span>{`${patient.address.street}, ${patient.address.city}, ${patient.address.state}, ${patient.address.country}`}</span>
+                                    {/* <span>{`${patient.address.street}, ${patient.address.city}, ${patient.address.state}, ${patient.address.country}`}</span> */}
                                 </div>
 
 

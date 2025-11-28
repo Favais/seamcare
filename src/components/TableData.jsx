@@ -11,7 +11,6 @@ import { ActivityIcon, Eye, MoreVertical } from 'lucide-react';
 const TableData = () => {
 
     const { appointments, loading } = useAppContext()
-    // console.log(appointments);
 
     const columns = [
         { field: 'visitorId', headerName: 'Visit No.', width: 90 },

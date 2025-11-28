@@ -6,12 +6,14 @@ const AppointmentSchema = new mongoose.Schema({
         unique: true,
         sparse: true,  // <— this allows multiple nulls or missing values
     },
-    patientId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-    doctorId: { type: mongoose.Schema.Types.ObjectId, ref: 'Doctor', required: true },
+    patientId: { type: mongoose.Schema.Types.ObjectId, ref: 'user', required: true },
+    doctorId: { type: mongoose.Schema.Types.ObjectId, ref: 'user', required: true },
+    patientNumber: String,
     date: Date,
     time: String,
     reason: String,
     status: { type: String, enum: ['pending', 'confirmed', 'cancelled'], default: 'pending' }
 }, { timestamps: true });
 
+// mongoose.models = {};
 export default mongoose.models.Appointment || mongoose.model('Appointment', AppointmentSchema);

@@ -1,25 +1,96 @@
 "use client"
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 // import multiMonthPlugin from '@fullcalendar/multimonth'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import './css/customCalenderStyle.css'
+import { useAppContext } from '@/context/AppContext'
+import axios from 'axios'
+import { useDoctorAppointments } from '@/hooks/getDoctorAppointments'
 
 
 
 const page = () => {
+    const { user } = useAppContext()
+    const { data: appointments, isLoading, error } = useDoctorAppointments(user.userId);
+    // console.log(appointments, isLoading, error);
+
+    const events = appointments?.map(appt => {
+        const start = new Date(`${appt.date.slice(0, 10)}T${appt.time}:00`);
+        return {
+            id: appt.id,
+            title: appt.patientName,
+            date: start,
+            extendedProps: {
+                patientId: appt.patientNumber,
+                doctorName: appt.doctorName,
+                status: appt.status
+            }
+        }
+    });
+    console.log(events);
 
     const docColor = (role) => {
         switch (role) {
             case 'radiologist':
                 return '#DA9100'
                 break
+        }
+    }
+    const appointment = [
+        {
+            title: 'Medical Assesment',
+            date: '2025-10-07T09:30:00',
+            dotColor: docColor('radiologist')
+        },
+        {
+            title: 'Team Meetings',
+            start: '2025-10-25T11:00:00',
+            end: '2025-07-25T13:30:00'
+        },
+        {
+            title: 'MRI Scan',
+            start: '2025-10-25T10:00:00',
+            end: '2025-07-25T11:30:00'
+        },
+        {
+            title: 'Check Up',
+            start: '2025-10-20T12:00:00',
+            end: '2025-07-20T13:30:00',
+
+        },
+        {
+            title: 'Check Up',
+            start: '2025-07-20T12:30:00',
+            end: '2025-07-20T14:00:00',
+
+        },
+        {
+            title: 'Check Up',
+            start: '2025-07-20T14:30:00',
+            end: '2025-07-20T15:00:00',
 
         }
+    ]
+    const fetchAppt = async (patientId) => {
+        try {
+            const res = await axios.get(`/api/appointments/${patientId}`)
+            setMyAppointment(res.data.appointments)
+            console.log(res.data.appointments);
 
-
+        } catch (error) {
+            console.log(error);
+        }
     }
+
+    // useEffect(() => {
+    //     if (user.userId) {
+    //         fetchAppt(user?.userId)
+    //         console.log();
+    //     }
+    // }, [user])
+
     return (
         <div className='p-3 h-full'>
             <FullCalendar
@@ -37,41 +108,7 @@ const page = () => {
                 }}
                 editable={true}
                 selectable={true}
-                events={[
-                    {
-                        title: 'Medical Assesment',
-                        date: '2025-10-07T09:30:00',
-                        dotColor: docColor('radiologist')
-                    },
-                    {
-                        title: 'Team Meetings',
-                        start: '2025-10-25T11:00:00',
-                        end: '2025-07-25T13:30:00'
-                    },
-                    {
-                        title: 'MRI Scan',
-                        start: '2025-10-25T10:00:00',
-                        end: '2025-07-25T11:30:00'
-                    },
-                    {
-                        title: 'Check Up',
-                        start: '2025-10-20T12:00:00',
-                        end: '2025-07-20T13:30:00',
-
-                    },
-                    {
-                        title: 'Check Up',
-                        start: '2025-07-20T12:30:00',
-                        end: '2025-07-20T14:00:00',
-
-                    },
-                    {
-                        title: 'Check Up',
-                        start: '2025-07-20T14:30:00',
-                        end: '2025-07-20T15:00:00',
-
-                    }
-                ]}
+                events={events}
                 eventDidMount={(info) => {
                     const dotEl = info.el.querySelector('.fc-daygrid-event-dot');
                     if (dotEl && info.event.extendedProps.dotColor) {

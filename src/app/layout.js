@@ -1,25 +1,31 @@
 "use client";
-import { Inter, Poppins } from "next/font/google";
+import { Inter, Poppins, Montserrat } from "next/font/google";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
 import { AppWrapper } from "@/context/AppContext";
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const poppins = Poppins({ subsets: ["latin"], variable: "--font-poppins", weight: ["400", "700"] });
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+const montserrat = Montserrat({
+  subsets: ["latin"], display: "swap",
+});
 
 // export const metadata = {
 //   title: "Seam Care",
 //   description: "Book appoinment and manage patients",
 // };
+const queryClient = new QueryClient();
+
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${poppins.variable} antialiased`}>
-        <SessionProvider>
-          <AppWrapper>
-            {children}
-          </AppWrapper>
-        </SessionProvider>
+      <body className={`${montserrat.className} antialiased`}>
+        <QueryClientProvider client={queryClient}>
+          <SessionProvider>
+            <AppWrapper>
+              {children}
+            </AppWrapper>
+          </SessionProvider>
+        </QueryClientProvider>
       </body>
     </html>
   );

@@ -14,15 +14,14 @@ import Contact from './Contact';
 
 const PatientDetails = ({ setCurrentView, setSelectedPatient, patient }) => {
     const [activeTab, setActiveTab] = useState('overview')
-    console.log(activeTab);
 
     const handleBackToList = () => {
         setCurrentView('list')
         setSelectedPatient(null)
     }
 
-    const pastAppointment = patient.appointments.filter(apt => apt.status !== 'Upcoming')
-    const upcomingAppointment = patient.appointments.filter(apt => apt.status === 'Upcoming')
+    const pastAppointment = patient.appointments.filter(apt => apt.status !== 'done')
+    const upcomingAppointment = patient.appointments.filter(apt => apt.status === 'pending')
 
 
     return (
@@ -42,7 +41,7 @@ const PatientDetails = ({ setCurrentView, setSelectedPatient, patient }) => {
             </div>
             <PatientProfile
                 patient={patient}
-                MedicalRecord={patient.medicalHistory.allergies}
+            // MedicalRecord={patient.patientProfileInfo.medicalHistory.allergies}
             />
             <Tabs className='py-3' value={activeTab} onValueChange={setActiveTab}>
                 <TabsList className='grid grid-cols-4 w-full bg-white'>
@@ -60,9 +59,9 @@ const PatientDetails = ({ setCurrentView, setSelectedPatient, patient }) => {
                 </TabsContent>
                 <TabsContent value={'medical'}>
                     <MedicalRecord
-                        MedicalRecord={patient.medicalHistory}
-                        vitals={patient.vitals}
-                        vaccinations={patient.vaccinations}
+                        MedicalRecord={patient.patientProfileInfo.medicalHistory}
+                        vitals={patient.patientProfileInfo.vitals}
+                        vaccinations={patient.patientProfileInfo.vaccinations}
                     />
                 </TabsContent>
                 <TabsContent value={'contact'}>

@@ -7,10 +7,11 @@ const AppContext = createContext();
 
 export const AppWrapper = ({ children }) => {
     const [doctorProfiles, setDoctorProfiles] = useState(null);
-    const [appointments, setAppointments] = useState({})
+    const [appointments, setAppointments] = useState([])
     const [patients, setPatients] = useState({})
     const [loading, setLoading] = useState(false)
     const { data: session } = useSession();
+
 
     const user = {
         userId: session?.user?.id,
@@ -21,23 +22,32 @@ export const AppWrapper = ({ children }) => {
 
     }
 
-    const getAppointments = async () => {
+    const getAppointments = async (doctorId) => {
         try {
             if (session && user?.role === "doctor") {
-                const res = await axios.post('/api/doctors/appointments', { userId: user.userId })
+                const res = await axios.post(`/api/${doctorId}/appointments`, { userId: user.userId })
                 setAppointments(res.data.appointments)
             }
         } catch (error) {
             console.log(error);
-
         }
 
     }
+    // const fetchDailyTimeSlots = async (doctorId, date) => {
+    //     try {
+    //         const res = await axios.post(`/api/${doctorId}/slots`, { date })
+    //         console.log(res.data)
+    //         return res.data
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
 
-    const getPatients = async () => {
+    // }
+
+    const getPatients = async (doctorId) => {
         try {
             if (session && user?.role === "doctor") {
-                const res = await axios.get('/api/doctors/patients')
+                const res = await axios.get(`/api/${doctorId}/patients`)
                 setPatients(res.data.patientsinfo)
             }
         } catch (error) {
@@ -46,28 +56,48 @@ export const AppWrapper = ({ children }) => {
         }
     }
 
+    const formatDate = (date) => {
+        return date.toLocaleDateString('en-US', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
+    };
+
+
     useEffect(() => {
+
         if (session && user?.role === "doctor") {
-            const fetchDoctorProfiles = async () => {
-                setLoading(true)
-                const response = await axios.get(`/api/doctors`);
-                setDoctorProfiles(response.data);
-                setLoading(false)
+            try {
+                const fetchDoctorProfiles = async (doctorId) => {
+                    setLoading(true)
+                    const response = await axios.get(`/api/${doctorId}`);
+                    setDoctorProfiles(response.data);
+                    setLoading(false)
+                }
+                fetchDoctorProfiles(user.userId);
+            } catch (error) {
+                console.log(error);
+
             }
-            fetchDoctorProfiles();
         }
     }, [session]);
 
     useEffect(() => {
-        getAppointments()
-        getPatients()
+        getAppointments(user?.userId)
+        getPatients(user?.userId)
+
     }, [session])
 
+    useEffect(() => {
+
+    }, [patients])
     const value = {
         session,
         user,
         doctorProfiles,
-        appointments, loading, setLoading, patients
+        appointments, loading,
+        setLoading, patients, formatDate
     }
     return (
         <AppContext.Provider value={value}>

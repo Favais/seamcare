@@ -1,5 +1,7 @@
 import connectDB from "@/lib/db"
 import appointmentSchema from "@/models/appointmentSchema";
+import PatientProfile from "@/models/patientProfile";
+import userModel from "@/models/userModel";
 import { NextResponse } from "next/server"
 
 
@@ -18,21 +20,26 @@ export const POST = async (request) => {
         });
         const nextNumber = countToday + 1;
         const visitorId = `${dateString}-${String(nextNumber).padStart(3, "0")}`;
+        const dateOnly = new Date(date);
+        dateOnly.setUTCHours(0, 0, 0, 0);
+        const patientProfile = await PatientProfile.findOne({ userId: patientId })
+        const doctorInfo = await userModel.findOne({ _id: doctorId })
 
-
-        const appoinment = new appointmentSchema({
+        if (!patientProfile) {
+            return NextResponse.json({ error: "Patient profile not found" }, { status: 404 });
+        }
+        const appointment = new appointmentSchema({
             visitorId,
             patientId,
+            patientNumber: patientProfile?.patientNumber,
             doctorId,
-            date,
+            date: dateOnly,
             time,
             reason,
-            status: "pending"
+            status: "pending",
         });
 
-
-
-        await appoinment.save();
+        await appointment.save();
         return NextResponse.json({ message: "Appointment created successfully", appointment: appoinment }, { status: 201 });
     } catch (error) {
         console.error("Error connecting to database:", error);

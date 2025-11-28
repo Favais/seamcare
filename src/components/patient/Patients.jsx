@@ -5,15 +5,18 @@ import { FaPlusSquare } from "react-icons/fa";
 import PatientsTable from './PatientsTable';
 import PatientDetails from './PatientDetails';
 import { patientsData } from './data';
+import { useAppContext } from '@/context/AppContext';
 
 
 const Patients = () => {
+  const { patients } = useAppContext()
   const [currentView, setCurrentView] = useState('list')
   const [selectedPatient, setSelectedPatient] = useState(null)
 
   const handleViewPatient = (patientId) => {
     setSelectedPatient(patientId)
     setCurrentView('view')
+
   }
 
   if (!selectedPatient && currentView === 'view') {
@@ -49,7 +52,7 @@ const Patients = () => {
       </div>
     )
   }
-  const patient = patientsData.find(p => p.patientNo === selectedPatient)
+  const patient = patients?.find(p => p.userInfo.id === selectedPatient)
 
   if (currentView === 'view') {
     return (

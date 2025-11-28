@@ -12,7 +12,7 @@ const Header = ({ value, setValue }) => {
         <div className='flex justify-between'>
             <div className='flex gap-6 items-center'>
                 <Input value={value} onChange={(e) => setValue(e.target.value)} className={'bg-white p-4 w-64 '} type="search" placeholder="Search" />
-                <p className='p-3 bg-blue-500/15 rounded-lg'>Welcome back <span className='font-bold text-blue-500'>{session?.user.role === 'doctor' ? "Dr" : "User"} {session?.user.lastName}</span></p>
+                <p className='p-3 bg-blue-500/15 rounded-lg'>Welcome back <span className='font-bold text-blue-500'>{session?.user.role === 'doctor' ? "Dr" : ""} {session?.user.lastName}</span></p>
             </div>
             <div className='flex gap-4'>
                 <Button variant='secondary' size='icon' className='bg-white'>

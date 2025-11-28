@@ -15,7 +15,7 @@ export const columns = [
         ),
     },
     {
-        accessorKey: "patientId",
+        accessorKey: "patientNumber",
         header: ({ column }) => (
             <button className='flex gap-2 items-center' onClick={() => column.toggleSorting()}>
                 Patient Number

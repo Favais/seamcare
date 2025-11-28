@@ -560,7 +560,7 @@ export const columns = ({ onViewPatient }) => [
 
     },
     {
-        accessorKey: "patientNo",
+        accessorKey: "patientNumber",
         header: ({ column }) => (
             <button className='flex gap-2 items-center' onClick={() => column.toggleSorting()}>
                 Patient Number
@@ -568,8 +568,10 @@ export const columns = ({ onViewPatient }) => [
             </button>
         ),
         cell: ({ row }) => {
+            console.log(row.original);
+
             return (
-                <p className="p-0.5 w-fit rounded bg-neutral-200">{row.original.patientProfileInfo.patientId}</p>
+                <p className="p-0.5 w-fit rounded bg-neutral-200">{row.original.patientProfileInfo.patientNumber}</p>
             )
         }
     },
@@ -631,11 +633,12 @@ export const columns = ({ onViewPatient }) => [
         enableGlobalFilter: false,
         header: 'Action',
         cell: ({ row }) => {
+
             return <div className="flex gap-2">
                 <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => onViewPatient(row.original.patientNo)}
+                    onClick={() => onViewPatient(row.original.userInfo.id)}
                 >
                     <BsEye className="h-3 w-3" />
                 </Button>

@@ -22,6 +22,10 @@ export const authOptions = {
                 if (!isValid) {
                     throw new Error("Invalid password");
                 }
+
+                if (user.role !== credentials.role) {
+                    throw new Error(`You are not authorized to log in as a ${credentials.role}`);
+                }
                 return {
                     email: user.email,
                     userId: user._id,
