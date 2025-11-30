@@ -41,7 +41,7 @@ export const ActionMenu = ({ row }) => {
                             Appointment for <strong>{row.patientName}</strong> with{" "}
                             <strong>{row.doctorName}</strong>
                         </p>
-                        <p>Date: {row.date}</p>
+                        <p>Date: {new Date(row.date).toDateString()}</p>
                         <p>Time: {row.time}</p>
                         <p>Current status: {row.status}</p>
                     </div>

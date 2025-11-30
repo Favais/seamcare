@@ -31,12 +31,12 @@ const Appointments = ({ globalFilter, setGlobalFilter }) => {
 
 
     return (
-        <div className='flex flex-col gap-3 bg-white rounded-2xl p-3 h-fit'>
+        <div className='flex flex-col gap-3 bg-white rounded-2xl p-3 h-full'>
             <div>
                 <p className='p-1 text-2xl font-medium'>Appointments</p>
             </div>
-            <div className=" text-gray-700">
-                <Table className={'border-none'}>
+            <div className=" text-gray-700 flex-1 flex flex-col">
+                <Table className={'border-none flex-1'}>
                     <TableHeader className={''}>
                         {
                             table.getHeaderGroups().map((headerGroup) => (
@@ -55,23 +55,27 @@ const Appointments = ({ globalFilter, setGlobalFilter }) => {
                             ))
                         }
                     </TableHeader>
-                    <TableBody className='border-none'>
-                        {
-                            table.getRowModel().rows.map((rows) => (
-                                <TableRow className={''} key={rows.id}>
-                                    {
-                                        rows.getVisibleCells().map((cell) => (
-                                            <TableCell key={cell.id} className={'p-4'}>
-                                                {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                            </TableCell>
-                                        ))
-                                    }
+                    <TableBody className="flex-1">
+                        {table.getRowModel().rows.length ? (
+                            table.getRowModel().rows.map((row) => (
+                                <TableRow key={row.id}>
+                                    {row.getVisibleCells().map((cell) => (
+                                        <TableCell key={cell.id} className="p-4">
+                                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                        </TableCell>
+                                    ))}
                                 </TableRow>
                             ))
-                        }
+                        ) : (
+                            <TableRow>
+                                <TableCell colSpan={columns.length} className="text-center py-10 text-gray-400">
+                                    No appointments available
+                                </TableCell>
+                            </TableRow>
+                        )}
                     </TableBody>
                 </Table>
-                <div className="flex items-center justify-between px-2 py-3">
+                <div className="flex items-center justify-between px-2 py-3 mt-auto">
                     <button
                         onClick={() => table.previousPage()}
                         disabled={!table.getCanPreviousPage()}

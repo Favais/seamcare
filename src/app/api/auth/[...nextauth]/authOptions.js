@@ -44,6 +44,7 @@ export const authOptions = {
     },
     callbacks: {
         async jwt({ token, user }) {
+
             // When user logs in, merge their info into the token
             if (user) {
                 token.userId = user.userId;
@@ -55,6 +56,7 @@ export const authOptions = {
         },
 
         async session({ session, token }) {
+
             // Make all token info available in the session
             if (token) {
                 session.user.id = token.userId;
@@ -62,6 +64,7 @@ export const authOptions = {
                 session.user.firstName = token.firstName;
                 session.user.lastName = token.lastName;
             }
+
             return session;
         }
     }

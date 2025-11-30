@@ -20,7 +20,7 @@ const PatientDetails = ({ setCurrentView, setSelectedPatient, patient }) => {
         setSelectedPatient(null)
     }
 
-    const pastAppointment = patient.appointments.filter(apt => apt.status !== 'done')
+    const pastAppointment = patient.appointments.filter(apt => apt.status !== 'pending')
     const upcomingAppointment = patient.appointments.filter(apt => apt.status === 'pending')
 
 

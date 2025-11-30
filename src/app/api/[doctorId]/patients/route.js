@@ -12,6 +12,7 @@ export const GET = async (req, { params }) => {
     const patientsinfo = await Promise.all(userPatient.map(async (patient) => {
         const patientProfileInfo = await PatientProfile.findOne({ userId: patient._id })
         const appointments = await appointmentSchema.find({ patientId: patient._id })
+            .populate('doctorId', 'firstName lastName')
         return {
             userInfo: {
                 id: patient._id,

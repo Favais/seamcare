@@ -14,16 +14,26 @@ const AppointmentsTable = ({ appointments, title, pages }) => {
         pageIndex: 0,
         pageSize: pages,
     });
+    console.log(appointments);
 
     // columns.js
     const columns = [
         {
-            accessorKey: "appointmentId",
+            accessorKey: "visitorId",
             header: "Appointment ID",
         },
         {
-            accessorKey: "doctor",
+            accessorKey: "doctorId",
             header: "Doctor",
+            cell: ({ row }) => {
+                const doctor = row.original.doctorId;
+                const fullName = doctor
+                    ? `${doctor.firstName} ${doctor.lastName}`
+                    : "—";
+                return (
+                    <span>{fullName}</span>
+                )
+            }
         },
         {
             accessorKey: "department",
@@ -32,6 +42,16 @@ const AppointmentsTable = ({ appointments, title, pages }) => {
         {
             accessorKey: "date",
             header: "Date",
+            cell: ({ row }) => {
+                const date = row.getValue("date");
+                const readable = new Date(date).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                });
+
+                return readable;
+            },
         },
         {
             accessorKey: "time",
@@ -44,7 +64,7 @@ const AppointmentsTable = ({ appointments, title, pages }) => {
                 const status = row.getValue("status");
 
                 const statusColorMap = {
-                    Upcoming: "bg-blue-100 text-blue-800",
+                    pending: "bg-blue-100 text-blue-800",
                     Completed: "bg-green-100 text-green-800",
                     Cancelled: "bg-red-100 text-red-800",
                 };

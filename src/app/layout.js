@@ -4,6 +4,7 @@ import "./globals.css";
 import { SessionProvider } from "next-auth/react";
 import { AppWrapper } from "@/context/AppContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "@/components/ui/sonner";
 const montserrat = Montserrat({
   subsets: ["latin"], display: "swap",
 });
@@ -23,6 +24,7 @@ export default function RootLayout({ children }) {
           <SessionProvider>
             <AppWrapper>
               {children}
+              <Toaster richColors position="top-right" />
             </AppWrapper>
           </SessionProvider>
         </QueryClientProvider>

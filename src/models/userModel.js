@@ -11,6 +11,7 @@ const UserSchema = new mongoose.Schema({
     // Shared fields
     profilePicture: String,
     dateOfBirth: Date,
+    address: String,
 
 }, { timestamps: true });
 
