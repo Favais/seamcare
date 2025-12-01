@@ -26,28 +26,28 @@ const PatientDetails = ({ setCurrentView, setSelectedPatient, patient }) => {
 
     return (
         <div>
-            <div>
-                <p className='text-xl font-black'>Patient Details</p>
-                <p className='text-sm'>Comprehensive patient information and medical history</p>
+            <div className='mb-4'>
+                <p className='text-lg sm:text-xl font-black'>Patient Details</p>
+                <p className='text-xs sm:text-sm text-neutral-600'>Comprehensive patient information and medical history</p>
             </div>
-            <div className='flex items-center justify-between'>
-                <div className='flex gap-4 items-center'>
-                    <Button variant='outline' onClick={handleBackToList}><GoArrowLeft />Back to Patients</Button>
+            <div className='flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 mb-4'>
+                <div className='flex gap-2 sm:gap-4 items-center flex-wrap'>
+                    <Button variant='outline' onClick={handleBackToList} className='text-xs sm:text-sm'><GoArrowLeft />Back to Patients</Button>
                 </div>
-                <div className='flex gap-3'>
-                    <Button variant={'outline'}><FaRegEdit />Edit Patient</Button>
-                    <Button><BsCalendar />Schedule Appointment</Button>
+                <div className='flex flex-col sm:flex-row gap-2 sm:gap-3 w-full sm:w-auto'>
+                    <Button variant={'outline'} className='text-xs sm:text-sm'><FaRegEdit />Edit Patient</Button>
+                    <Button className='text-xs sm:text-sm'><BsCalendar />Schedule Appointment</Button>
                 </div>
             </div>
             <PatientProfile
                 patient={patient}
             />
-            <Tabs className='py-3' value={activeTab} onValueChange={setActiveTab}>
-                <TabsList className='grid grid-cols-4 w-full bg-white'>
-                    <TabsTrigger className='data-[state=active]:bg-blue-500 data-[state=active]:text-white rounded-md' value='overview'>Overview</TabsTrigger>
-                    <TabsTrigger className='data-[state=active]:bg-blue-500 data-[state=active]:text-white' value='appointments'>Appointments</TabsTrigger>
-                    <TabsTrigger className='data-[state=active]:bg-blue-500 data-[state=active]:text-white' value='medical'>Medical Records</TabsTrigger>
-                    <TabsTrigger className='data-[state=active]:bg-blue-500 data-[state=active]:text-white' value='contact'>Contact & Insurance</TabsTrigger>
+            <Tabs className='py-2 sm:py-3' value={activeTab} onValueChange={setActiveTab}>
+                <TabsList className='grid grid-cols-2 sm:grid-cols-4 w-full bg-white gap-1'>
+                    <TabsTrigger className='text-xs sm:text-sm data-[state=active]:bg-blue-500 data-[state=active]:text-white rounded-md' value='overview'>Overview</TabsTrigger>
+                    <TabsTrigger className='text-xs sm:text-sm data-[state=active]:bg-blue-500 data-[state=active]:text-white' value='appointments'>Appointments</TabsTrigger>
+                    <TabsTrigger className='text-xs sm:text-sm data-[state=active]:bg-blue-500 data-[state=active]:text-white' value='medical'>Medical</TabsTrigger>
+                    <TabsTrigger className='text-xs sm:text-sm data-[state=active]:bg-blue-500 data-[state=active]:text-white' value='contact'>Contact</TabsTrigger>
                 </TabsList>
                 <TabsContent className='flex flex-col gap-2' value={'overview'}>
                     <AppointmentsTable appointments={upcomingAppointment} title='Upcoming Appointments' pages={2} />
@@ -66,7 +66,7 @@ const PatientDetails = ({ setCurrentView, setSelectedPatient, patient }) => {
                 </TabsContent>
             </Tabs>
 
-        </div >
+        </div>
     )
 }
 

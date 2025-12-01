@@ -3,7 +3,7 @@ import React from 'react'
 
 const page = () => {
     return (
-        <div>
+        <div className='py-2 sm:py-3 px-2 sm:px-4 min-h-screen'>
             <SettingsPage />
         </div>
     )

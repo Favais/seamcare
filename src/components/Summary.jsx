@@ -15,10 +15,10 @@ import { FaBedPulse } from "react-icons/fa6";
 
 const Summary = () => {
     return (
-        <div className='flex flex-col gap-2'>
-            <div className=''>
+        <div className='flex flex-col gap-2 sm:gap-3'>
+            <div className='w-full sm:w-auto'>
                 <Select >
-                    <SelectTrigger>
+                    <SelectTrigger className='text-sm sm:text-base'>
                         <SelectValue placeholder='Today' />
                     </SelectTrigger>
                     <SelectContent>
@@ -29,7 +29,7 @@ const Summary = () => {
                     </SelectContent>
                 </Select>
             </div>
-            <div className='flex gap-2'>
+            <div className='flex flex-col sm:flex-row gap-2 sm:gap-2'>
                 <AchievementCard
                     cardTitle={'Appointments'}
                     cardScore={'24'}

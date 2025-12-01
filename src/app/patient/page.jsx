@@ -1,3 +1,4 @@
+"use client"
 import Header from '@/components/Header'
 import { AnalyticsCard } from '@/components/patient-route/AnalyticsCard'
 import GuageChart from '@/components/patient-route/Guage'

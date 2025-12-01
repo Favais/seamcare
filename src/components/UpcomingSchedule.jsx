@@ -34,10 +34,10 @@ const UpcomingSchedule = () => {
 
 
     return (
-        <div className='py-5 px-4 bg-white rounded-2xl overflow-y-auto'>
-            <div className='flex justify-between '>
-                <p className='text-lg font-semibold text-neutral-600'>Upcoming Schedule</p>
-                <p className='text-sm text-blue-500'>View All</p>
+        <div className='py-4 sm:py-5 px-3 sm:px-4 bg-white rounded-lg sm:rounded-2xl overflow-y-auto max-h-[500px]'>
+            <div className='flex flex-col sm:flex-row justify-between gap-2 sm:gap-0'>
+                <p className='text-base sm:text-lg font-semibold text-neutral-600'>Upcoming Schedule</p>
+                <p className='text-xs sm:text-sm text-blue-500 w-fit'>View All</p>
             </div>
             <div className=''>
                 {
@@ -45,52 +45,52 @@ const UpcomingSchedule = () => {
                         // const event = scheduleMap[hour]
 
                         return (
-                            <Timeline key={key} sx={{ px: 0 }} position='right'>
+                            <Timeline key={key} sx={{ px: 0, py: { xs: 0.5, sm: 1 } }} position='right'>
                                 <TimelineItem sx={{}}>
-                                    <TimelineOppositeContent sx={{ flex: 0.2, pl: 0, }}>
+                                    <TimelineOppositeContent sx={{ flex: { xs: 0.15, sm: 0.2 }, pl: 0, fontSize: { xs: '0.7rem', sm: '0.875rem' } }}>
                                         <Typography sx={{ textAlign: 'start' }} variant='body2' color='text.secondary'>
                                             {key}
                                         </Typography>
                                     </TimelineOppositeContent>
                                     <TimelineSeparator>
-                                        <TimelineDot color='grey' />
+                                        <TimelineDot color='grey' sx={{ width: { xs: 12, sm: 'auto' }, height: { xs: 12, sm: 'auto' } }} />
                                         <TimelineConnector />
                                     </TimelineSeparator>
-                                    <TimelineContent sx={{ pr: 0 }}>
+                                    <TimelineContent sx={{ pr: 0, fontSize: { xs: '0.75rem', sm: '0.875rem' } }}>
                                         {
                                             value.map((evt, idx) => (
                                                 <div key={idx} className='flex flex-col mb-1'>
-                                                    <Accordion elevation={1} disableGutters sx={{ borderRadius: 2 }}>
-                                                        <AccordionSummary expandIcon={<IoIosArrowDown />}>
-                                                            <Typography variant="subtitle1" fontWeight="" className={`${evt.status === 'confirmed' ? 'line-through text-neutral-500' : evt.status === 'cancelled' ? 'text-red-500 line-through' : ''}`}>
-                                                                <GoDotFill className='inline-flex' />  {evt.startTime}   {evt.title}
+                                                    <Accordion elevation={1} disableGutters sx={{ borderRadius: 1, fontSize: { xs: '0.75rem', sm: '0.875rem' } }}>
+                                                        <AccordionSummary expandIcon={<IoIosArrowDown />} sx={{ padding: { xs: '8px', sm: '12px' } }}>
+                                                            <Typography variant="subtitle1" fontWeight="" className={`text-xs sm:text-base ${evt.status === 'confirmed' ? 'line-through text-neutral-500' : evt.status === 'cancelled' ? 'text-red-500 line-through' : ''}`}>
+                                                                <GoDotFill className='inline-flex text-xs sm:text-sm' />  <span className='text-xs sm:text-sm'>{evt.startTime}</span>   <span className='text-xs sm:text-sm'>{evt.title}</span>
                                                             </Typography>
                                                         </AccordionSummary>
-                                                        <AccordionDetails>
+                                                        <AccordionDetails sx={{ padding: { xs: '8px', sm: '12px' }, fontSize: { xs: '0.7rem', sm: '0.875rem' } }}>
                                                             <Typography variant="body2" color="text.secondary" component='div'>
-                                                                <div className='flex gap-4'>
-                                                                    <p className='font-semibold'>Patient</p>
+                                                                <div className='flex gap-2 sm:gap-4 text-xs sm:text-sm'>
+                                                                    <p className='font-semibold whitespace-nowrap'>Patient</p>
                                                                     <p>{evt.patient}</p>
                                                                 </div>
                                                             </Typography>
-                                                            <Typography variant="body2" py={2} component='div'>
-                                                                <div className='flex gap-4'>
-                                                                    <p className='font-semibold'>Time</p>
+                                                            <Typography variant="body2" py={1} component='div'>
+                                                                <div className='flex gap-2 sm:gap-4 text-xs sm:text-sm'>
+                                                                    <p className='font-semibold whitespace-nowrap'>Time</p>
                                                                     <p>{evt.startTime} - {evt.endTime}</p>
                                                                 </div>
                                                             </Typography>
                                                             <Typography component='div'>
-                                                                <div className='flex gap-4'>
-                                                                    <p className='font-semibold'>Purpose</p>
+                                                                <div className='flex gap-2 sm:gap-4 text-xs sm:text-sm'>
+                                                                    <p className='font-semibold whitespace-nowrap'>Purpose</p>
                                                                     <p>{evt.type}</p>
                                                                 </div>
                                                             </Typography>
-                                                            <Divider className='pt-3' />
-                                                            <div className='flex justify-between items-center pt-2'>
-                                                                <IconButton size='small'>
-                                                                    <MdDelete color='red' />
+                                                            <Divider className='py-1 sm:pt-3' />
+                                                            <div className='flex flex-col sm:flex-row justify-between items-start sm:items-center pt-1 sm:pt-2 gap-2 sm:gap-0'>
+                                                                <IconButton size='small' sx={{ padding: '4px' }}>
+                                                                    <MdDelete color='red' className='text-xs sm:text-sm' />
                                                                 </IconButton>
-                                                                <button className='text-blue-500 p-1.5 bg-blue-50 rounded text-sm'>Begin appointment</button>
+                                                                <button className='text-blue-500 p-1 sm:p-1.5 bg-blue-50 rounded text-xs sm:text-sm hover:bg-blue-100 transition'>Begin appointment</button>
                                                             </div>
                                                         </AccordionDetails>
                                                     </Accordion>

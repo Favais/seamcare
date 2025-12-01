@@ -6,16 +6,14 @@ const GuageChart = () => {
     const value = 75;
 
     return (
-        <div className='relative'>
+        <div className='relative w-full h-64 sm:h-80'>
             <Gauge
                 value={value}
                 startAngle={-100}
                 endAngle={100}
-                // height={200}
-                // innerRadius={100}
                 sx={{
                     "& .MuiGauge-valueText": {
-                        fontSize: 20,
+                        fontSize: { xs: 16, sm: 20 },
                         transform: 'translate(0px, 0px)',
                     },
                     "& .MuiGauge-referenceArc": {
@@ -32,9 +30,9 @@ const GuageChart = () => {
                 text={() => ('')}
             />
             {/* Custom centered text overlay */}
-            <div className="absolute inset-10 sm:inset-15 text-center">
-                <p className="text-sm text-gray-500">Average Health Score</p>
-                <p className="text-2xl font-semibold text-blue-600">{value}</p>
+            <div className="absolute inset-8 sm:inset-10 lg:inset-15 text-center flex flex-col justify-center items-center">
+                <p className="text-xs sm:text-sm text-gray-500">Average Health Score</p>
+                <p className="text-xl sm:text-2xl font-semibold text-blue-600">{value}</p>
             </div>
 
         </div>

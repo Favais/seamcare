@@ -31,11 +31,11 @@ const Appointments = ({ globalFilter, setGlobalFilter }) => {
 
 
     return (
-        <div className='flex flex-col gap-3 bg-white rounded-2xl p-3 h-full'>
+        <div className='flex flex-col gap-2 sm:gap-3 bg-white rounded-lg sm:rounded-2xl p-2 sm:p-3 h-full overflow-x-auto'>
             <div>
-                <p className='p-1 text-2xl font-medium'>Appointments</p>
+                <p className='p-1 text-lg sm:text-2xl font-medium'>Appointments</p>
             </div>
-            <div className=" text-gray-700 flex-1 flex flex-col">
+            <div className="text-gray-700 flex-1 flex flex-col text-xs sm:text-sm">
                 <Table className={'border-none flex-1'}>
                     <TableHeader className={''}>
                         {
@@ -43,7 +43,7 @@ const Appointments = ({ globalFilter, setGlobalFilter }) => {
                                 <TableRow key={headerGroup.id} className={''}>
                                     {
                                         headerGroup.headers.map((header) => (
-                                            <TableHead key={header.id} className={''}>
+                                            <TableHead key={header.id} className='p-2 sm:p-3'>
                                                 {
                                                     flexRender(header.column.columnDef.header, header.getContext())
 
@@ -60,7 +60,7 @@ const Appointments = ({ globalFilter, setGlobalFilter }) => {
                             table.getRowModel().rows.map((row) => (
                                 <TableRow key={row.id}>
                                     {row.getVisibleCells().map((cell) => (
-                                        <TableCell key={cell.id} className="p-4">
+                                        <TableCell key={cell.id} className="p-2 sm:p-4">
                                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                         </TableCell>
                                     ))}
@@ -68,30 +68,30 @@ const Appointments = ({ globalFilter, setGlobalFilter }) => {
                             ))
                         ) : (
                             <TableRow>
-                                <TableCell colSpan={columns.length} className="text-center py-10 text-gray-400">
+                                <TableCell colSpan={columns.length} className="text-center py-8 sm:py-10 text-gray-400 text-xs sm:text-sm">
                                     No appointments available
                                 </TableCell>
                             </TableRow>
                         )}
                     </TableBody>
                 </Table>
-                <div className="flex items-center justify-between px-2 py-3 mt-auto">
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-0 px-2 py-2 sm:py-3 mt-auto text-xs sm:text-sm">
                     <button
                         onClick={() => table.previousPage()}
                         disabled={!table.getCanPreviousPage()}
-                        className="px-3 py-1 text-sm border rounded disabled:opacity-50"
+                        className="px-2 sm:px-3 py-1 text-xs sm:text-sm border rounded disabled:opacity-50 hover:bg-gray-50 transition w-full sm:w-auto"
                     >
                         Previous
                     </button>
 
-                    <span className="text-sm">
+                    <span className="text-xs sm:text-sm">
                         Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
                     </span>
 
                     <button
                         onClick={() => table.nextPage()}
                         disabled={!table.getCanNextPage()}
-                        className="px-3 py-1 text-sm border rounded disabled:opacity-50"
+                        className="px-2 sm:px-3 py-1 text-xs sm:text-sm border rounded disabled:opacity-50 hover:bg-gray-50 transition w-full sm:w-auto"
                     >
                         Next
                     </button>

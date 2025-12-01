@@ -71,12 +71,12 @@ export function AnalyticsCard() {
     const hoveredValue = hoveredIndex !== null ? data[hoveredIndex]?.value : null;
 
     return (
-        <Card className="w-full max-w-4xl p-5 bg-white border-0">
+        <Card className="w-full p-3 sm:p-5 bg-white border-0">
             {/* Header */}
-            <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg">Analytics</h2>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 mb-3 sm:mb-4">
+                <h2 className="text-base sm:text-lg font-semibold">Analytics</h2>
                 <Select value={timePeriod} onValueChange={setTimePeriod}>
-                    <SelectTrigger className="w-[140px] border-none bg-gray-50 rounded-xl">
+                    <SelectTrigger className="w-full sm:w-[140px] border-none bg-gray-50 rounded-lg sm:rounded-xl text-xs sm:text-sm">
                         <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -89,10 +89,10 @@ export function AnalyticsCard() {
             </div>
 
             {/* Metric Tabs */}
-            <div className="flex gap-3 mb-4">
+            <div className="flex flex-wrap gap-2 sm:gap-3 mb-3 sm:mb-4">
                 <button
                     onClick={() => setActiveMetric("Heart Rate")}
-                    className={`px-6 py-3 rounded-full transition-all ${activeMetric === "Heart Rate"
+                    className={`px-3 sm:px-6 py-2 sm:py-3 rounded-full transition-all text-xs sm:text-sm ${activeMetric === "Heart Rate"
                         ? "bg-gray-900 text-white"
                         : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50"
                         }`}
@@ -101,7 +101,7 @@ export function AnalyticsCard() {
                 </button>
                 <button
                     onClick={() => setActiveMetric("Blood Pressure")}
-                    className={`px-6 py-3 rounded-full transition-all ${activeMetric === "Blood Pressure"
+                    className={`px-3 sm:px-6 py-2 sm:py-3 rounded-full transition-all text-xs sm:text-sm ${activeMetric === "Blood Pressure"
                         ? "bg-gray-900 text-white"
                         : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50"
                         }`}
@@ -110,7 +110,7 @@ export function AnalyticsCard() {
                 </button>
                 <button
                     onClick={() => setActiveMetric("Glucose")}
-                    className={`px-6 py-3 rounded-full transition-all ${activeMetric === "Glucose"
+                    className={`px-3 sm:px-6 py-2 sm:py-3 rounded-full transition-all text-xs sm:text-sm ${activeMetric === "Glucose"
                         ? "bg-gray-900 text-white"
                         : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50"
                         }`}
@@ -118,18 +118,18 @@ export function AnalyticsCard() {
                     Glucose
                 </button>
                 <button
-                    className="px-6 py-3 rounded-full bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 transition-all"
+                    className="px-3 sm:px-6 py-2 sm:py-3 rounded-full bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 transition-all text-xs sm:text-sm"
                 >
                     4+
                 </button>
             </div>
 
             {/* Chart */}
-            <div className="w-full h-60 relative">
+            <div className="w-full h-40 sm:h-60 relative">
                 <ResponsiveContainer width="100%" height="100%">
                     <BarChart
                         data={data}
-                        margin={{ top: 20, right: 30, left: 10, bottom: 5 }}
+                        margin={{ top: 20, right: 10, left: 0, bottom: 5 }}
                         onMouseMove={(state) => {
                             if (state.isTooltipActive) {
                                 setHoveredIndex(state.activeTooltipIndex);
@@ -144,14 +144,15 @@ export function AnalyticsCard() {
                             dataKey="day"
                             axisLine={false}
                             tickLine={false}
-                            tick={{ fill: "#9ca3af" }}
+                            tick={{ fill: "#9ca3af", fontSize: 12 }}
                         />
                         <YAxis
                             axisLine={false}
                             tickLine={false}
-                            tick={{ fill: "#9ca3af" }}
+                            tick={{ fill: "#9ca3af", fontSize: 12 }}
                             domain={[0, 180]}
                             ticks={[0, 20, 40, 60, 80, 100, 120, 140, 160, 180]}
+                            width={30}
                         />
                         <Tooltip
                             content={<CustomTooltip />}

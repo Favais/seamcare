@@ -34,25 +34,25 @@ const PatientsTable = ({ handleViewPatient }) => {
         // onPaginationChange: setPagination
     })
     return (
-        <Card className='flex flex-col flex-1 gap-4 bg-white rounded-2xl py-4'>
-            <CardHeader>
-                <CardTitle>
+        <Card className='flex flex-col flex-1 gap-3 sm:gap-4 bg-white rounded-lg sm:rounded-2xl py-3 sm:py-4 overflow-x-auto'>
+            <CardHeader className='p-3 sm:p-6'>
+                <CardTitle className='text-base sm:text-lg'>
                     Patient Directory
                 </CardTitle>
             </CardHeader>
-            <CardContent>
-                <div className='flex gap-3 mb-4'>
+            <CardContent className='p-3 sm:p-6'>
+                <div className='flex flex-col sm:flex-row gap-2 sm:gap-3 mb-3 sm:mb-4'>
                     <div className='relative flex-1'>
                         <Search size={15} className='absolute left-3 top-3' />
                         <Input
                             value={globalFilter}
                             onChange={(e) => setGlobalFilter(e.target.value)}
-                            className={'pl-8'}
-                            placeholder="Search patients by name, ID, or email..."
+                            className={'pl-8 text-xs sm:text-sm'}
+                            placeholder="Search patients..."
                         />
                     </div>
                     <Select value={statusFilter} onValueChange={setStatusFilter}>
-                        <SelectTrigger className="w-[180px]">
+                        <SelectTrigger className="w-full sm:w-[140px] text-xs sm:text-sm">
                             <SelectValue placeholder="Filter by status" />
                         </SelectTrigger>
                         <SelectContent>
@@ -64,7 +64,7 @@ const PatientsTable = ({ handleViewPatient }) => {
                     <Select value={sorting[0]?.id ?? ''} onValueChange={(columnId) => {
                         setSorting([{ id: columnId, desc: false }])
                     }}>
-                        <SelectTrigger className="w-[180px]">
+                        <SelectTrigger className="w-full sm:w-[140px] text-xs sm:text-sm">
                             <SelectValue placeholder="Sort by" />
                         </SelectTrigger>
                         <SelectContent>
@@ -75,41 +75,43 @@ const PatientsTable = ({ handleViewPatient }) => {
                     </Select>
                 </div>
 
-                <Table>
-                    <TableHeader>
-                        {
-                            table.getHeaderGroups().map(headerGroup =>
-                                <TableRow key={headerGroup.id}>
-                                    {
-                                        headerGroup.headers.map(header =>
-                                            <TableHead key={header.id}>
-                                                {
-                                                    flexRender(header.column.columnDef.header, header.getContext())
-                                                }
-                                            </TableHead>
-                                        )
-                                    }
-                                </TableRow>
-                            )}
-                    </TableHeader>
-                    <TableBody>
-                        {
-                            table.getRowModel().rows.map(rows =>
-                                <TableRow key={rows.id}>
-                                    {
-                                        rows.getVisibleCells().map(cell =>
-                                            <TableCell key={cell.id}>
-                                                {
-                                                    flexRender(cell.column.columnDef.cell, cell.getContext())
-                                                }
-                                            </TableCell>
-                                        )}
-                                </TableRow>
-                            )}
-                    </TableBody>
-                </Table>
+                <div className='overflow-x-auto'>
+                    <Table className='text-xs sm:text-sm'>
+                        <TableHeader>
+                            {
+                                table.getHeaderGroups().map(headerGroup =>
+                                    <TableRow key={headerGroup.id}>
+                                        {
+                                            headerGroup.headers.map(header =>
+                                                <TableHead key={header.id} className='p-2 sm:p-3'>
+                                                    {
+                                                        flexRender(header.column.columnDef.header, header.getContext())
+                                                    }
+                                                </TableHead>
+                                            )
+                                        }
+                                    </TableRow>
+                                )}
+                        </TableHeader>
+                        <TableBody>
+                            {
+                                table.getRowModel().rows.map(rows =>
+                                    <TableRow key={rows.id}>
+                                        {
+                                            rows.getVisibleCells().map(cell =>
+                                                <TableCell key={cell.id} className='p-2 sm:p-3'>
+                                                    {
+                                                        flexRender(cell.column.columnDef.cell, cell.getContext())
+                                                    }
+                                                </TableCell>
+                                            )}
+                                    </TableRow>
+                                )}
+                        </TableBody>
+                    </Table>
+                </div>
             </CardContent>
-        </Card >
+        </Card>
     )
 }
 

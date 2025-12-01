@@ -21,12 +21,12 @@ const Patients = () => {
 
   if (!selectedPatient && currentView === 'view') {
     return (
-      <div className="min-h-screen bg-background p-6">
+      <div className="min-h-screen bg-background p-3 sm:p-6">
         <div className="mx-auto max-w-7xl">
-          <div className="text-center py-12">
-            <h2 className="text-2xl mb-4">Patient not found</h2>
+          <div className="text-center py-8 sm:py-12">
+            <h2 className="text-xl sm:text-2xl mb-3 sm:mb-4">Patient not found</h2>
             <button onClick={() => setCurrentView('list')}
-              className="text-blue-500 hover:underline">
+              className="text-blue-500 hover:underline text-sm sm:text-base">
               Back to patient list
             </button>
           </div>
@@ -37,13 +37,13 @@ const Patients = () => {
 
   if (currentView === 'list') {
     return (
-      <div className='flex flex-col gap-3 flex-1'>
-        <div className='flex justify-between items-center'>
+      <div className='flex flex-col gap-2 sm:gap-3 flex-1'>
+        <div className='flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-0'>
           <div>
-            <p className='text-2xl font-semibold'>Patients</p>
-            <p className='text-neutral-600'>Manage and view all patient records</p>
+            <p className='text-xl sm:text-2xl font-semibold'>Patients</p>
+            <p className='text-xs sm:text-sm text-neutral-600'>Manage and view all patient records</p>
           </div>
-          <Button >
+          <Button className='text-xs sm:text-sm w-full sm:w-auto'>
             <FaPlusSquare />
             Add New Patient
           </Button>

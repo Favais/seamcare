@@ -7,11 +7,11 @@ const page = () => {
     const [globalFilter, setGlobalFilter] = useState("");
 
     return (
-        <div className='py-3 px-4 flex flex-col gap-8 h-full'>
-            <div className='pt-3'>
+        <div className='py-2 sm:py-3 px-2 sm:px-4 flex flex-col gap-6 sm:gap-8 min-h-screen'>
+            <div className='pt-2 sm:pt-3'>
                 <Header value={globalFilter} setValue={setGlobalFilter} />
             </div>
-            <div className='h-full'>
+            <div className='flex-1 min-h-0'>
                 <Appointments globalFilter={globalFilter} setGlobalFilter={setGlobalFilter} />
             </div>
         </div>

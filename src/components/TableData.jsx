@@ -65,10 +65,10 @@ const TableData = () => {
     ];
 
     return (
-        <div>
-            <Box sx={{ height: 450, width: '100%' }}>
+        <div className='overflow-x-auto'>
+            <Box sx={{ height: 'auto', minHeight: 300, width: '100%', overflowX: 'auto' }}>
                 <DataGrid
-                    className="px-4 
+                    className="px-2 sm:px-4 text-xs sm:text-sm
                     [&_.MuiDataGrid-virtualScrollerContent]:!border-0"
                     rows={appointments}
                     columns={columns}
@@ -88,13 +88,17 @@ const TableData = () => {
                     // [&_.MuiDataGrid-columnHeaders]:!border-0"
                     sx={{
                         border: 'none',
+                        fontSize: { xs: '0.75rem', sm: '0.875rem' },
                         '& .MuiDataGrid-columnSeparator': {
                             display: 'none',
                         },
                         '& .MuiDataGrid-cell': {
                             border: 'none',
+                            padding: { xs: '8px 4px', sm: '12px 8px' },
                         },
-
+                        '& .MuiDataGrid-columnHeaders': {
+                            fontSize: { xs: '0.75rem', sm: '0.875rem' },
+                        },
                     }}
                 />
             </Box>

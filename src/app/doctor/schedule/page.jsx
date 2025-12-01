@@ -92,30 +92,32 @@ const page = () => {
     // }, [user])
 
     return (
-        <div className='p-3 h-full'>
-            <FullCalendar
-                height='100%'
-                contentHeight="100%"
-                dayMaxEventRows={2} // Show max 2 rows of events per day
-                fixedWeekCount={true} // forces all months to have 6 rows
-                plugins={[dayGridPlugin, timeGridPlugin]}
-                // weekends={false}
-                initialView="dayGridMonth"
-                headerToolbar={{
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'timeGridDay,timeGridWeek,dayGridMonth'
-                }}
-                editable={true}
-                selectable={true}
-                events={events}
-                eventDidMount={(info) => {
-                    const dotEl = info.el.querySelector('.fc-daygrid-event-dot');
-                    if (dotEl && info.event.extendedProps.dotColor) {
-                        dotEl.style.borderColor = info.event.extendedProps.dotColor;
-                    }
-                }}
-            />
+        <div className='p-2 sm:p-3 min-h-screen flex flex-col'>
+            <div className='flex-1 min-h-0 rounded-lg overflow-auto'>
+                <FullCalendar
+                    height='100%'
+                    contentHeight="auto"
+                    dayMaxEventRows={2} // Show max 2 rows of events per day
+                    fixedWeekCount={true} // forces all months to have 6 rows
+                    plugins={[dayGridPlugin, timeGridPlugin]}
+                    // weekends={false}
+                    initialView="dayGridMonth"
+                    headerToolbar={{
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'timeGridDay,timeGridWeek,dayGridMonth'
+                    }}
+                    editable={true}
+                    selectable={true}
+                    events={events}
+                    eventDidMount={(info) => {
+                        const dotEl = info.el.querySelector('.fc-daygrid-event-dot');
+                        if (dotEl && info.event.extendedProps.dotColor) {
+                            dotEl.style.borderColor = info.event.extendedProps.dotColor;
+                        }
+                    }}
+                />
+            </div>
         </div>
     )
 }
