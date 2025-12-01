@@ -16,6 +16,6 @@ export const PATCH = async (request) => {
         return NextResponse.json({ doctorProfile })
     } catch (error) {
         console.log(error);
-
+        return NextResponse.json({ error: "Failed to update schedule", details: error.message }, { status: 500 })
     }
 }

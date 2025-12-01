@@ -12,7 +12,7 @@ export async function GET(request, { params }) {
         return NextResponse.json(doctorProfiles);
     } catch (error) {
         console.log(error);
-
+        return NextResponse.json({ error: "Failed to fetch doctor profile", details: error.message }, { status: 500 })
     }
 
 }

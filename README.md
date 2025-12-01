@@ -1,36 +1,142 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# SC — Patient/Doctor Appointment & Document Management Platform
 
-## Getting Started
+A full-stack web application built with **Next.js (App Router)**, **MongoDB/Mongoose**, **NextAuth**, and **Resend** that enables patients and doctors to manage appointments, documents, messaging, and scheduling through a unified interface.
 
-First, run the development server:
+---
 
+## Features
+
+### Patient Features
+- Create, upload, and view medical documents  
+- Book appointments with doctors  
+- Secure login & profile management  
+- View appointment history & notifications  
+
+### Doctor Features
+- Manage schedules & availability  
+- Review patient records  
+- Handle appointment requests  
+- Secure document access  
+
+### System Features
+- Secure authentication using **NextAuth Credentials Provider**
+- MongoDB database using **Mongoose** models
+- Email notifications powered by **Resend**
+- Fully responsive UI built with Next.js
+
+---
+
+## Tech Stack
+
+**Frontend**
+- Next.js (App Router)
+- React
+- Tailwind CSS
+- FullCalendar
+
+**Backend**
+- Next.js API Routes  
+- MongoDB / Mongoose  
+
+**Authentication**
+- NextAuth (Credentials Provider)
+
+**Email**
+- Resend API
+
+**Utilities**
+- Axios
+- Custom React hooks & contexts
+
+---
+
+## 📂 Project Structure
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+src/
+├── app/ # Next.js routes (API + pages)
+├── components/ # Reusable React components
+├── context/ # Global state (Auth, Modals, etc.)
+├── hooks/ # Custom React hooks
+├── lib/ # DB, email, axios client, helpers
+├── models/ # Mongoose schemas
+└── styles/ # Global styles
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Prerequisites
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Make sure you have installed:
 
-## Learn More
+- **Node.js ≥ 18**
+- **MongoDB Atlas or local MongoDB**
+- **Resend account**
+- **NextAuth secret** (auto-generated via `openssl rand -base64 32`)
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ⚙️ Installation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+git clone <repo-url>
+cd <project-folder>
+npm install
+```
 
-## Deploy on Vercel
+## Environment Variables
+Create a .env.local file in the root directory.
+Use the template from .env.example (provided below).
+```bash
+cp .env.example .env.local
+```
+Fill in your credentials.
+## Running the Development Server
+```bash
+npm run dev
+```
+Server runs at:
+```
+http://localhost:3000
+```
+## 🛠 Build for Production
+```
+npm run build
+npm start
+```
+## 🧪 Testing
+(Add test suite here if you later implement Jest/RTL)
+## 📬 Email Setup (Resend)
+ - Create an API Key from Resend dashboard
+- Add it to your .env.local as RESEND_API_KEY
+- Update the “from” email address if needed in lib/email.js
+## 🔐 Authentication Notes
+- The app uses NextAuth with Credentials Provider
+- Sessions stored using JWT
+- Make sure NEXTAUTH_SECRET is set in .env.local
+## 📈 Deployment
+You can deploy using:
+- Vercel
+- Render
+- DigitalOcean
+- Any platform that supports Node + environment variables
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Ensure you set production environment variables in the hosting platform.
+## 🧹 Code Quality & Standards
+This project follows:
+- ESLint rules from eslint.config.mjs
+- Prettier recommended formatting
+- Modular folder structure
+- API route separation of concerns
+(You can request a Prettier config + Husky hooks if you'd like.)
+## 🤝 Contributing
+- Fork the repository
+- Create a feature branch
+- Commit with clear messages
+- Open a pull request
+Want a CONTRIBUTING.md file? Just ask.
+## 📝 License
+MIT License.
+You are free to modify and use this project commercially.
+👨‍💻 Author
+Developed by 
+Contributions welcome!

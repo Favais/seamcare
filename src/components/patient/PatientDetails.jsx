@@ -26,13 +26,13 @@ const PatientDetails = ({ setCurrentView, setSelectedPatient, patient }) => {
 
     return (
         <div>
+            <div>
+                <p className='text-xl font-black'>Patient Details</p>
+                <p className='text-sm'>Comprehensive patient information and medical history</p>
+            </div>
             <div className='flex items-center justify-between'>
                 <div className='flex gap-4 items-center'>
                     <Button variant='outline' onClick={handleBackToList}><GoArrowLeft />Back to Patients</Button>
-                    <div>
-                        <p className='text-xl font-black'>Patient Details</p>
-                        <p className='text-sm'>Comprehensive patient information and medical history</p>
-                    </div>
                 </div>
                 <div className='flex gap-3'>
                     <Button variant={'outline'}><FaRegEdit />Edit Patient</Button>
@@ -41,7 +41,6 @@ const PatientDetails = ({ setCurrentView, setSelectedPatient, patient }) => {
             </div>
             <PatientProfile
                 patient={patient}
-            // MedicalRecord={patient.patientProfileInfo.medicalHistory.allergies}
             />
             <Tabs className='py-3' value={activeTab} onValueChange={setActiveTab}>
                 <TabsList className='grid grid-cols-4 w-full bg-white'>
@@ -59,13 +58,11 @@ const PatientDetails = ({ setCurrentView, setSelectedPatient, patient }) => {
                 </TabsContent>
                 <TabsContent value={'medical'}>
                     <MedicalRecord
-                        MedicalRecord={patient.patientProfileInfo.medicalHistory}
-                        vitals={patient.patientProfileInfo.vitals}
-                        vaccinations={patient.patientProfileInfo.vaccinations}
+                        patient={patient}
                     />
                 </TabsContent>
                 <TabsContent value={'contact'}>
-                    <Contact emergencyContacts={patient.emergencyContact} insurance={patient.insurance} />
+                    <Contact emergencyContacts={patient.patientProfileInfo.emergencyContact} insurance={patient.patientProfileInfo.insurance} />
                 </TabsContent>
             </Tabs>
 

@@ -37,7 +37,7 @@ const Patients = () => {
 
   if (currentView === 'list') {
     return (
-      <div className='flex flex-col gap-3'>
+      <div className='flex flex-col gap-3 flex-1'>
         <div className='flex justify-between items-center'>
           <div>
             <p className='text-2xl font-semibold'>Patients</p>

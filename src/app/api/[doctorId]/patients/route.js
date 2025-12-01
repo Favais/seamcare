@@ -6,29 +6,33 @@ import { NextResponse } from "next/server";
 
 
 export const GET = async (req, { params }) => {
-    const { patientId } = await params
-    connectDB();
-    const userPatient = await userModel.find({ role: "patient" })
-    const patientsinfo = await Promise.all(userPatient.map(async (patient) => {
-        const patientProfileInfo = await PatientProfile.findOne({ userId: patient._id })
-        const appointments = await appointmentSchema.find({ patientId: patient._id })
-            .populate('doctorId', 'firstName lastName')
-        return {
-            userInfo: {
-                id: patient._id,
-                firstName: patient.firstName,
-                lastName: patient.lastName,
-                email: patient.email,
-                phone: patient.phone,
-                gender: patient.gender,
-                profilePicture: patient.profilePicture,
-                dateOfBirth: patient.dateOfBirth,
-            },
-            patientProfileInfo,
-            appointments
-        };
-    }));
+    try {
+        const { patientId } = await params
+        connectDB();
+        const userPatient = await userModel.find({ role: "patient" })
+        const patientsinfo = await Promise.all(userPatient.map(async (patient) => {
+            const patientProfileInfo = await PatientProfile.findOne({ userId: patient._id })
+            const appointments = await appointmentSchema.find({ patientId: patient._id })
+                .populate('doctorId', 'firstName lastName')
+            return {
+                userInfo: {
+                    id: patient._id,
+                    firstName: patient.firstName,
+                    lastName: patient.lastName,
+                    email: patient.email,
+                    phone: patient.phone,
+                    gender: patient.gender,
+                    profilePicture: patient.profilePicture,
+                    dateOfBirth: patient.dateOfBirth,
+                },
+                patientProfileInfo,
+                appointments
+            };
+        }));
 
 
-    return NextResponse.json({ message: "All patients details fetched", patientsinfo })
+        return NextResponse.json({ message: "All patients details fetched", patientsinfo })
+    } catch (error) {
+        return NextResponse.json({ error: "Failed to fetch patients details", details: error.message }, { status: 500 })
+    }
 }

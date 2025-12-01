@@ -1,10 +1,11 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link';
 import { signIn } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { toast } from 'sonner';
 import { Eye, EyeOff } from "lucide-react"; // optional icon library
+import { sendEmail } from '@/lib/email';
 
 const Login = () => {
     const [role, setRole] = useState('patient');

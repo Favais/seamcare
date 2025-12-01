@@ -1,4 +1,5 @@
 import connectDB from "@/lib/db";
+import { sendEmail } from "@/lib/email";
 import DoctorProfile from "@/models/doctorProfile";
 import PatientProfile from "@/models/patientProfile";
 import userModel from "@/models/userModel";
@@ -150,7 +151,17 @@ export const POST = async (request) => {
                 rating: rating || 0
             });
         }
-
+        try {
+            await sendEmail({
+                to: email,
+                subject: "Welcome to SeamCare!",
+                name: firstName,
+                role,
+                loginUrl: "https://seamcare.com/login",
+            })
+        } catch (error) {
+            throw new Error("Error sending welcome email");
+        }
         return NextResponse.json(
             { message: "User registered successfully" },
             { status: 201 }

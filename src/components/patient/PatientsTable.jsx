@@ -34,14 +34,14 @@ const PatientsTable = ({ handleViewPatient }) => {
         // onPaginationChange: setPagination
     })
     return (
-        <Card className='flex flex-col gap-2 bg-white rounded-2xl px-4 py-4'>
+        <Card className='flex flex-col flex-1 gap-4 bg-white rounded-2xl py-4'>
             <CardHeader>
                 <CardTitle>
                     Patient Directory
                 </CardTitle>
             </CardHeader>
             <CardContent>
-                <div className='flex gap-3'>
+                <div className='flex gap-3 mb-4'>
                     <div className='relative flex-1'>
                         <Search size={15} className='absolute left-3 top-3' />
                         <Input

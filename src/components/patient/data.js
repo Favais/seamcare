@@ -560,7 +560,8 @@ export const columns = ({ onViewPatient }) => [
 
     },
     {
-        accessorKey: "patientNumber",
+        id: "patientNumber", // optional, you can keep this as a reference
+        accessorFn: row => row.patientProfileInfo.patientNumber,
         header: ({ column }) => (
             <button className='flex gap-2 items-center' onClick={() => column.toggleSorting()}>
                 Patient Number
@@ -580,9 +581,10 @@ export const columns = ({ onViewPatient }) => [
         accessorFn: row => `${row.age} ${row.gender}`,
         header: 'Gender',
         cell: ({ row }) => {
+            const age = new Date().getFullYear() - new Date(row.original.userInfo.dateOfBirth).getFullYear();
             return (
                 <div>
-                    <p>{row.original.age} years</p>
+                    <p>{age} years</p>
                     <p className="text-xs text-neutral-500">{row.original.userInfo.gender}</p>
                 </ div>
             )
@@ -619,10 +621,10 @@ export const columns = ({ onViewPatient }) => [
             </button>
         ),
         cell: ({ row }) => {
-            const upcoming = row.original.appointments?.find(a => a.status === "Upcoming");
+            const upcoming = row.original.appointments?.find(a => a.status === "pending");
             return upcoming?.date
                 ? <div>
-                    <p>{upcoming.date}</p>
+                    <p>{new Date(upcoming.date).toLocaleDateString()}</p>
                     <p>{upcoming.time}</p>
                 </div>
                 : <p className="text-gray-500">None scheduled</p>;
