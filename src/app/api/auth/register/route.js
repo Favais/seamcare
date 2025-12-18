@@ -50,6 +50,7 @@ export const POST = async (request) => {
         }
 
         const existingUser = await userModel.findOne({ email });
+
         if (existingUser) {
             return NextResponse.json(
                 { message: "User already exists" },
@@ -159,8 +160,12 @@ export const POST = async (request) => {
                 role,
                 loginUrl: "https://seamcare.com/login",
             })
+            console.log("Welcome email sent to:", email);
         } catch (error) {
-            throw new Error("Error sending welcome email");
+            console.error("Welcome email failed:", {
+                message: error?.error?.message || error.message,
+                status: error?.error?.statusCode,
+            });
         }
         return NextResponse.json(
             { message: "User registered successfully" },
