@@ -4,16 +4,23 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '.
 import { useReactTable, flexRender, getCoreRowModel, getSortedRowModel, getPaginationRowModel, getFilteredRowModel } from '@tanstack/react-table';
 import { columns, data } from './data';
 import { useAppContext } from '@/context/AppContext';
+import { useDoctorAppointments } from '@/hooks/useDoctorAppointments';
+import { useSession } from 'next-auth/react';
 
 const Appointments = ({ globalFilter, setGlobalFilter }) => {
-    const { appointments } = useAppContext()
+    const { session } = useAppContext()
+    console.log(session);
+
+    const { data: appointments, isLoading, error } = useDoctorAppointments(session?.user?.id);
+    // console.log(appointments, isLoading, error);
+
     const [sorting, setSorting] = useState([])
     const [pagination, setPagination] = useState({
         pageIndex: 0,
         pageSize: 10,
     })
     const table = useReactTable({
-        data: appointments,
+        data: appointments || [],
         columns,
         getCoreRowModel: getCoreRowModel(),
         getFilteredRowModel: getFilteredRowModel(),

@@ -7,7 +7,7 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import './css/customCalenderStyle.css'
 import { useAppContext } from '@/context/AppContext'
 import axios from 'axios'
-import { useDoctorAppointments } from '@/hooks/getDoctorAppointments'
+import { useDoctorAppointments } from '@/hooks/useDoctorAppointments'
 
 
 
@@ -73,16 +73,6 @@ const page = () => {
 
         }
     ]
-    const fetchAppt = async (patientId) => {
-        try {
-            const res = await axios.get(`/api/appointments/${patientId}`)
-            setMyAppointment(res.data.appointments)
-            console.log(res.data.appointments);
-
-        } catch (error) {
-            console.log(error);
-        }
-    }
 
     // useEffect(() => {
     //     if (user.userId) {

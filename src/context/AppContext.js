@@ -7,7 +7,6 @@ const AppContext = createContext();
 
 export const AppWrapper = ({ children }) => {
     const [doctorProfiles, setDoctorProfiles] = useState(null);
-    const [appointments, setAppointments] = useState([])
     const [patients, setPatients] = useState({})
     const [loading, setLoading] = useState(false)
     const { data: session } = useSession();
@@ -19,18 +18,6 @@ export const AppWrapper = ({ children }) => {
         lastName: session?.user?.lastName,
         email: session?.user?.email,
         role: session?.user?.role,
-
-    }
-
-    const getAppointments = async (doctorId) => {
-        try {
-            if (session && user?.role === "doctor") {
-                const res = await axios.post(`/api/${doctorId}/appointments`, { userId: user.userId })
-                setAppointments(res.data.appointments)
-            }
-        } catch (error) {
-            console.log(error);
-        }
 
     }
     // const fetchDailyTimeSlots = async (doctorId, date) => {
@@ -83,11 +70,6 @@ export const AppWrapper = ({ children }) => {
         }
     }, [session]);
 
-    useEffect(() => {
-        getAppointments(user?.userId)
-        getPatients(user?.userId)
-
-    }, [session])
 
     useEffect(() => {
 
@@ -95,8 +77,7 @@ export const AppWrapper = ({ children }) => {
     const value = {
         session,
         user,
-        doctorProfiles,
-        appointments, loading,
+        doctorProfiles, loading,
         setLoading, patients, formatDate
     }
     return (

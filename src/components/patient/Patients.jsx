@@ -6,17 +6,18 @@ import PatientsTable from './PatientsTable';
 import PatientDetails from './PatientDetails';
 import { patientsData } from './data';
 import { useAppContext } from '@/context/AppContext';
+import { usePatients } from '@/hooks/useAllPatient';
 
 
 const Patients = () => {
-  const { patients } = useAppContext()
+  const { user, session } = useAppContext()
+  const { data: patients, isLoading, error } = usePatients({ doctorId: user.userId, session, user });
   const [currentView, setCurrentView] = useState('list')
   const [selectedPatient, setSelectedPatient] = useState(null)
 
   const handleViewPatient = (patientId) => {
     setSelectedPatient(patientId)
     setCurrentView('view')
-
   }
 
   if (!selectedPatient && currentView === 'view') {
@@ -37,7 +38,7 @@ const Patients = () => {
 
   if (currentView === 'list') {
     return (
-      <div className='flex flex-col gap-2 sm:gap-3 flex-1'>
+      <div className='flex flex-col gap-2 sm:gap-3 h-screen'>
         <div className='flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-0'>
           <div>
             <p className='text-xl sm:text-2xl font-semibold'>Patients</p>
@@ -48,7 +49,9 @@ const Patients = () => {
             Add New Patient
           </Button>
         </div>
-        <PatientsTable handleViewPatient={handleViewPatient} />
+        <div className='flex-1 min-h-0 overflow-hidden'>
+          <PatientsTable handleViewPatient={handleViewPatient} patients={patients} />
+        </div>
       </div>
     )
   }

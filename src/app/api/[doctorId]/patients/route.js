@@ -9,8 +9,11 @@ export const GET = async (req, { params }) => {
     try {
         const { patientId } = await params
         connectDB();
-        const userPatient = await userModel.find({ role: "patient" })
-        const patientsinfo = await Promise.all(userPatient.map(async (patient) => {
+        const userPatient = await userModel
+            .find({ role: "patient" })
+            .select("firstName lastName email phone gender profilePicture dateOfBirth");
+
+        const patientsInfo = await Promise.all(userPatient.map(async (patient) => {
             const patientProfileInfo = await PatientProfile.findOne({ userId: patient._id })
             const appointments = await appointmentSchema.find({ patientId: patient._id })
                 .populate('doctorId', 'firstName lastName')
@@ -31,7 +34,7 @@ export const GET = async (req, { params }) => {
         }));
 
 
-        return NextResponse.json({ message: "All patients details fetched", patientsinfo })
+        return NextResponse.json({ message: "All patients details fetched", patientsInfo })
     } catch (error) {
         return NextResponse.json({ error: "Failed to fetch patients details", details: error.message }, { status: 500 })
     }

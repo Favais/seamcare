@@ -9,8 +9,7 @@ import { patientsData, columns as getColumns } from './data'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../ui/table'
 import { useAppContext } from '@/context/AppContext'
 
-const PatientsTable = ({ handleViewPatient }) => {
-    const { patients } = useAppContext();
+const PatientsTable = ({ handleViewPatient, patients }) => {
     const [statusFilter, setStatusFilter] = useState('')
     const [sorting, setSorting] = useState([])
     const [globalFilter, setGlobalFilter] = useState('')
@@ -34,14 +33,14 @@ const PatientsTable = ({ handleViewPatient }) => {
         // onPaginationChange: setPagination
     })
     return (
-        <Card className='flex flex-col flex-1 gap-3 sm:gap-4 bg-white rounded-lg sm:rounded-2xl py-3 sm:py-4 overflow-x-auto'>
+        <Card className='flex flex-col bg-white rounded-lg sm:rounded-2xl min-h-0 h-full'>
             <CardHeader className='p-3 sm:p-6'>
                 <CardTitle className='text-base sm:text-lg'>
                     Patient Directory
                 </CardTitle>
             </CardHeader>
-            <CardContent className='p-3 sm:p-6'>
-                <div className='flex flex-col sm:flex-row gap-2 sm:gap-3 mb-3 sm:mb-4'>
+            <CardContent className='flex flex-col flex-1 min-h-0'>
+                <div className='shrink-0 flex flex-col sm:flex-row gap-2 sm:gap-3 mb-3 sm:mb-4'>
                     <div className='relative flex-1'>
                         <Search size={15} className='absolute left-3 top-3' />
                         <Input
@@ -75,7 +74,7 @@ const PatientsTable = ({ handleViewPatient }) => {
                     </Select>
                 </div>
 
-                <div className='overflow-x-auto'>
+                <div className=' flex-1 min-h-0 overflow-y-auto overflow-x-auto '>
                     <Table className='text-xs sm:text-sm'>
                         <TableHeader>
                             {

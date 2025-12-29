@@ -6,12 +6,16 @@ import { red } from '@mui/material/colors';
 import { Button } from "@/components/ui/button"
 import { useAppContext } from '@/context/AppContext';
 import { ActivityIcon, Eye, MoreVertical } from 'lucide-react';
+import { useDoctorAppointments } from '@/hooks/useDoctorAppointments';
 
 
 const TableData = () => {
 
-    const { appointments, loading } = useAppContext()
+    const { user } = useAppContext()
+    console.log(user);
 
+    const { data: appointments, isLoading, error } = useDoctorAppointments(user?.userId);
+    // console.log(appointments, isLoading, error);
     const columns = [
         { field: 'visitorId', headerName: 'Visit No.', width: 90 },
         {
@@ -70,9 +74,9 @@ const TableData = () => {
                 <DataGrid
                     className="px-2 sm:px-4 text-xs sm:text-sm
                     [&_.MuiDataGrid-virtualScrollerContent]:!border-0"
-                    rows={appointments}
+                    rows={appointments || []}
                     columns={columns}
-                    loading={loading}
+                    loading={isLoading}
                     initialState={{
                         pagination: {
                             paginationModel: {
