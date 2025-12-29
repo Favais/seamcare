@@ -3,6 +3,7 @@ import { sendEmail } from "@/lib/email";
 import DoctorProfile from "@/models/doctorProfile";
 import PatientProfile from "@/models/patientProfile";
 import userModel from "@/models/userModel";
+import { registerSchema } from "@/schemas/registerSchema";
 import { hashPassword } from "@/utils/auth";
 import { NextResponse } from "next/server";
 
@@ -10,6 +11,17 @@ connectDB();
 
 export const POST = async (request) => {
     try {
+        const data = await request.json();
+
+        let validatedData;
+        try {
+            validatedData = registerSchema.parse(data);
+        } catch (error) {
+            return NextResponse.json(
+                { errors: error.errors.map(e => ({ field: e.path[0], message: e.message })) },
+                { status: 400 }
+            );
+        }
         const {
             email,
             password,
@@ -37,11 +49,8 @@ export const POST = async (request) => {
             appointments,
             labResults,
             vaccinations
-        } = await request.json();
-
-        // ============================
+        } = validatedData;
         // VALIDATE BASIC FIELDS
-        // ============================
         if (!email || !password || !role || !firstName || !lastName) {
             return NextResponse.json(
                 { message: "All fields are required" },
@@ -58,9 +67,7 @@ export const POST = async (request) => {
             );
         }
 
-        // ============================
         // CREATE USER
-        // ============================
         const hashedPassword = await hashPassword(password);
 
         const newUser = new userModel({
@@ -77,9 +84,7 @@ export const POST = async (request) => {
 
         await newUser.save();
 
-        // ============================
         // GENERATE PATIENT NUMBER
-        // ============================
         const genPatientNumber = () => {
             const prefix = "SMC";
             const timestamp = new Date()

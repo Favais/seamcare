@@ -2,13 +2,15 @@
 import StepOne from '@/components/signup/StepOne';
 import StepThree from '@/components/signup/StepThree';
 import StepTwo from '@/components/signup/StepTwo';
-import { Input } from '@/components/ui/input';
 import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { registerSchema } from '@/schemas/registerSchema';
+
 
 
 const page = () => {
@@ -22,6 +24,7 @@ const page = () => {
         reset,
         trigger,
     } = useForm({
+        resolver: zodResolver(registerSchema),
         defaultValues: { role: 'patient' }
     })
     const router = useRouter();

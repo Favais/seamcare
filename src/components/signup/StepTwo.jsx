@@ -22,13 +22,7 @@ const StepTwo = ({ register, prevStep, nextStep, errors, trigger }) => {
                 <input
                     id="dob"
                     type="date"
-                    {...register("dateOfBirth", {
-                        required: "Date of birth is required",
-                        validate: (value) => {
-                            const age = new Date().getFullYear() - new Date(value).getFullYear();
-                            return age >= 18 || "You must be at least 18 years old";
-                        }
-                    })}
+                    {...register("dateOfBirth")}
                     className={`w-full p-2 border rounded-lg focus:outline-none focus:ring-2 ${errors.dateOfBirth ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'}`}
                 />
                 {errors.dateOfBirth && <p className="text-red-500 text-sm mt-1">{errors.dateOfBirth.message}</p>}
@@ -41,7 +35,7 @@ const StepTwo = ({ register, prevStep, nextStep, errors, trigger }) => {
                 </label>
                 <select
                     id="gender"
-                    {...register("gender", { required: "Please select a gender" })}
+                    {...register("gender")}
                     className={`w-full p-2 border rounded-lg focus:outline-none focus:ring-2 ${errors.gender ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'}`}
                 >
                     <option value="">Select gender</option>
@@ -60,10 +54,7 @@ const StepTwo = ({ register, prevStep, nextStep, errors, trigger }) => {
                 <input
                     id="address"
                     type="text"
-                    {...register("address", {
-                        required: "Address is required",
-                        minLength: { value: 5, message: "Address must be at least 5 characters" }
-                    })}
+                    {...register("address")}
                     placeholder="Enter your address"
                     className={`w-full p-2 border rounded-lg focus:outline-none focus:ring-2 ${errors.address ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'}`}
                 />
@@ -78,13 +69,7 @@ const StepTwo = ({ register, prevStep, nextStep, errors, trigger }) => {
                 <input
                     id="phone"
                     type="tel"
-                    {...register("phone", {
-                        required: "Phone number is required",
-                        pattern: {
-                            value: /^[\d\s\-\+\(\)]{10,}$/,
-                            message: "Please enter a valid phone number"
-                        }
-                    })}
+                    {...register("phone")}
                     placeholder="+234 801 234 5678"
                     className={`w-full p-2 border rounded-lg focus:outline-none focus:ring-2 ${errors.phone ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'}`}
                 />
