@@ -34,7 +34,7 @@ const UpcomingSchedule = () => {
 
 
     return (
-        <div className='py-4 sm:py-5 px-3 sm:px-4 bg-white rounded-lg sm:rounded-2xl overflow-y-auto max-h-[500px]'>
+        <div className='py-4 sm:py-5 px-3 sm:px-4 bg-white rounded-lg sm:rounded-2xl overflow-y-auto max-h-screen h-full'>
             <div className='flex flex-col sm:flex-row justify-between gap-2 sm:gap-0'>
                 <p className='text-base sm:text-lg font-semibold text-neutral-600'>Upcoming Schedule</p>
                 <p className='text-xs sm:text-sm text-blue-500 w-fit'>View All</p>

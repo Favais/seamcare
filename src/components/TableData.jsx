@@ -12,7 +12,6 @@ import { useDoctorAppointments } from '@/hooks/useDoctorAppointments';
 const TableData = () => {
 
     const { user } = useAppContext()
-    console.log(user);
 
     const { data: appointments, isLoading, error } = useDoctorAppointments(user?.userId);
     // console.log(appointments, isLoading, error);

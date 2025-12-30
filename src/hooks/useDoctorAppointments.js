@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import api from "@/lib/axios";
 
 export const useDoctorAppointments = (doctorId) => {
-    console.log(doctorId);
     return useQuery({
         queryKey: ["appointments", doctorId],   // ← cache per patient
         queryFn: async () => {

@@ -15,6 +15,14 @@ import { useDropzone } from 'react-dropzone'
 
 const UploadDoc = () => {
 
+    const submit = (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const docTitle = formData.get('file');
+
+        // Handle form submission logic here
+        console.log(docTitle);
+    }
     const onDrop = useCallback((acceptedFiles) => {
         console.log(acceptedFiles);
     }, []);
@@ -24,16 +32,17 @@ const UploadDoc = () => {
         multiple: true, // allow multiple files
         accept: {
             "image/*": [], // restrict to images
+            "application/pdf": [] // restrict to pdf files
         },
     });
     return (
         <div className='flex justify-end items-center py-3'>
             <Dialog>
-                <form action="">
-                    <DialogTrigger asChild>
-                        <Button variant="outline"><UploadCloud /> Upload a document</Button>
-                    </DialogTrigger>
-                    <DialogContent>
+                <DialogTrigger asChild>
+                    <Button variant="outline"><UploadCloud /> Upload a document</Button>
+                </DialogTrigger>
+                <DialogContent className={'w-full'}>
+                    <form onSubmit={submit} className='w' >
                         <DialogHeader>
                             <DialogTitle>Upload Document</DialogTitle>
                             <DialogDescription>
@@ -47,7 +56,7 @@ const UploadDoc = () => {
                                 <Input id="Title" name="docTitle" defaultValue="X-Ray Result" />
                             </div>
                             <div className='grid grid-cols-2'>
-                                <Select>
+                                <Select name="fileType">
                                     <SelectTrigger className="w-[180px]">
                                         <SelectValue placeholder="Selct document type" />
                                     </SelectTrigger>
@@ -81,8 +90,8 @@ const UploadDoc = () => {
                             </DialogClose>
                             <Button type="submit"><BsUpload />Upload</Button>
                         </DialogFooter>
-                    </DialogContent>
-                </form>
+                    </form>
+                </DialogContent>
             </Dialog>
         </div>
     )

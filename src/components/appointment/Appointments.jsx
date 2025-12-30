@@ -9,9 +9,8 @@ import { useSession } from 'next-auth/react';
 
 const Appointments = ({ globalFilter, setGlobalFilter }) => {
     const { session } = useAppContext()
-    console.log(session);
-
-    const { data: appointments, isLoading, error } = useDoctorAppointments(session?.user?.id);
+    const doctorId = session?.user?.id
+    const { data: appointments, isLoading, error } = useDoctorAppointments(doctorId);
     // console.log(appointments, isLoading, error);
 
     const [sorting, setSorting] = useState([])
