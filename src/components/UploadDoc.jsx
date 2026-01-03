@@ -36,9 +36,12 @@ const UploadDoc = () => {
     maxSize: 5485760,
   });
 
-  const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
-    addFiles(acceptedFiles, rejectedFiles);
-  }, []);
+  const onDrop = useCallback(
+    (acceptedFiles, rejectedFiles) => {
+      addFiles(acceptedFiles, rejectedFiles);
+    },
+    [addFiles]
+  );
   const submit = async (e) => {
     e.preventDefault();
   };

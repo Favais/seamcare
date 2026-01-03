@@ -1,113 +1,197 @@
-"use client"
-import React from 'react'
-import { Box, Typography } from '@mui/material';
-import { DataGrid, GridActionsCellItem, renderActionsCell } from '@mui/x-data-grid';
-import { red } from '@mui/material/colors';
-import { Button } from "@/components/ui/button"
-import { useAppContext } from '@/context/AppContext';
-import { ActivityIcon, Eye, MoreVertical } from 'lucide-react';
-import { useDoctorAppointments } from '@/hooks/useDoctorAppointments';
-
+"use client";
+import React from "react";
+import { Box, Typography } from "@mui/material";
+import {
+  DataGrid,
+  GridActionsCellItem,
+  renderActionsCell,
+} from "@mui/x-data-grid";
+import { red } from "@mui/material/colors";
+import { Button } from "@/components/ui/button";
+import { useAppContext } from "@/context/AppContext";
+import { ActivityIcon, Eye, MoreVertical } from "lucide-react";
+import { useDoctorAppointments } from "@/hooks/useDoctorAppointments";
 
 const TableData = () => {
+  const { user } = useAppContext();
 
-    const { user } = useAppContext()
-
-    const { data: appointments, isLoading, error } = useDoctorAppointments(user?.userId);
-    // console.log(appointments, isLoading, error);
-    const columns = [
-        { field: 'visitorId', headerName: 'Visit No.', width: 90 },
-        {
-            field: 'patientName',
-            headerName: 'Patient Name',
-            description: 'This column has a value getter and is not sortable.',
-            sortable: false,
-            width: 160,
-            // valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
-        },
-        {
-            field: 'gender',
-            headerName: 'Gender',
-            width: 150,
-            editable: true,
-        },
-        {
-            field: 'reason',
-            headerName: 'Reason',
-            width: 150,
-            editable: true,
-        },
-        {
-            field: 'action',
-            headerName: 'Action',
-            type: 'actions',
-            renderCell: (params) => (
-                <div className=''>
-                    <Button variant='outline' className=''>
-                        <MoreVertical />
-                    </Button>
-                </div>
-            ),
-            width: 110,
-            // editable: true,
-        },
-
-    ];
-
-    const rows = [
-        { id: 10421, firstName: 'Emily', lastName: 'Johnson', age: 28, gender: 'Female', reason: 'General checkup' },
-        { id: 97532, firstName: 'Michael', lastName: 'Smith', age: 42, gender: 'Male', reason: 'Follow-up visit' },
-        { id: 65234, firstName: 'Olivia', lastName: 'Brown', age: 35, gender: 'Female', reason: 'Flu symptoms' },
-        { id: 82390, firstName: 'James', lastName: 'Williams', age: 50, gender: 'Male', reason: 'Blood pressure check' },
-        { id: 11475, firstName: 'Sophia', lastName: 'Jones', age: 23, gender: 'Female', reason: 'Allergy treatment' },
-        { id: 40912, firstName: 'Daniel', lastName: 'Garcia', age: 37, gender: 'Male', reason: 'Skin irritation' },
-        { id: 73561, firstName: 'Mia', lastName: 'Martinez', age: 31, gender: 'Female', reason: 'Routine exam' },
-        { id: 58273, firstName: 'William', lastName: 'Rodriguez', age: 46, gender: 'Male', reason: 'Chest pain' },
-        { id: 30192, firstName: 'Ava', lastName: 'Lopez', age: 19, gender: 'Female', reason: 'Physical therapy' },
-        { id: 99814, firstName: 'Liam', lastName: 'Hernandez', age: 33, gender: 'Male', reason: 'Digestive issues' },
-    ];
-
-    return (
-        <div className='overflow-x-auto'>
-            <Box sx={{ height: 'auto', minHeight: 300, width: '100%', overflowX: 'auto' }}>
-                <DataGrid
-                    className="px-2 sm:px-4 text-xs sm:text-sm
-                    [&_.MuiDataGrid-virtualScrollerContent]:!border-0"
-                    rows={appointments || []}
-                    columns={columns}
-                    loading={isLoading}
-                    initialState={{
-                        pagination: {
-                            paginationModel: {
-                                pageSize: 7,
-                            },
-                        },
-                    }}
-                    // hideFooter={true}
-                    pageSizeOptions={[5]}
-                    // checkboxSelection
-                    disableRowSelectionOnClick
-                    // [&_.MuiDataGrid-cell]:!border-0 
-                    // [&_.MuiDataGrid-columnHeaders]:!border-0"
-                    sx={{
-                        border: 'none',
-                        fontSize: { xs: '0.75rem', sm: '0.875rem' },
-                        '& .MuiDataGrid-columnSeparator': {
-                            display: 'none',
-                        },
-                        '& .MuiDataGrid-cell': {
-                            border: 'none',
-                            padding: { xs: '8px 4px', sm: '12px 8px' },
-                        },
-                        '& .MuiDataGrid-columnHeaders': {
-                            fontSize: { xs: '0.75rem', sm: '0.875rem' },
-                        },
-                    }}
-                />
-            </Box>
+  const {
+    data: appointments,
+    isLoading,
+    error,
+  } = useDoctorAppointments(user?.userId);
+  // console.log(appointments, isLoading, error);
+  const columns = [
+    { field: "visitorId", headerName: "Visit No.", width: 90 },
+    {
+      field: "patientName",
+      headerName: "Patient Name",
+      description: "This column has a value getter and is not sortable.",
+      sortable: false,
+      width: 160,
+      // valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
+    },
+    {
+      field: "gender",
+      headerName: "Gender",
+      width: 150,
+      editable: true,
+    },
+    {
+      field: "reason",
+      headerName: "Reason",
+      width: 150,
+      editable: true,
+    },
+    {
+      field: "action",
+      headerName: "Action",
+      type: "actions",
+      renderCell: (params) => (
+        <div className="">
+          <Button variant="outline" className="">
+            <MoreVertical />
+          </Button>
         </div>
-    )
+      ),
+      width: 110,
+      // editable: true,
+    },
+  ];
 
-}
+  const rows = [
+    {
+      id: 10421,
+      firstName: "Emily",
+      lastName: "Johnson",
+      age: 28,
+      gender: "Female",
+      reason: "General checkup",
+    },
+    {
+      id: 97532,
+      firstName: "Michael",
+      lastName: "Smith",
+      age: 42,
+      gender: "Male",
+      reason: "Follow-up visit",
+    },
+    {
+      id: 65234,
+      firstName: "Olivia",
+      lastName: "Brown",
+      age: 35,
+      gender: "Female",
+      reason: "Flu symptoms",
+    },
+    {
+      id: 82390,
+      firstName: "James",
+      lastName: "Williams",
+      age: 50,
+      gender: "Male",
+      reason: "Blood pressure check",
+    },
+    {
+      id: 11475,
+      firstName: "Sophia",
+      lastName: "Jones",
+      age: 23,
+      gender: "Female",
+      reason: "Allergy treatment",
+    },
+    {
+      id: 40912,
+      firstName: "Daniel",
+      lastName: "Garcia",
+      age: 37,
+      gender: "Male",
+      reason: "Skin irritation",
+    },
+    {
+      id: 73561,
+      firstName: "Mia",
+      lastName: "Martinez",
+      age: 31,
+      gender: "Female",
+      reason: "Routine exam",
+    },
+    {
+      id: 58273,
+      firstName: "William",
+      lastName: "Rodriguez",
+      age: 46,
+      gender: "Male",
+      reason: "Chest pain",
+    },
+    {
+      id: 30192,
+      firstName: "Ava",
+      lastName: "Lopez",
+      age: 19,
+      gender: "Female",
+      reason: "Physical therapy",
+    },
+    {
+      id: 99814,
+      firstName: "Liam",
+      lastName: "Hernandez",
+      age: 33,
+      gender: "Male",
+      reason: "Digestive issues",
+    },
+  ];
 
-export default TableData
+  return (
+    <div className="flex flex-col h-full gap-4">
+      <Box
+        sx={{
+          flex: 1,
+          height: "100%",
+          width: "100%",
+          overflow: "hidden",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <DataGrid
+          className="px-2 sm:px-4 text-xs sm:text-sm
+                    [&_.MuiDataGrid-virtualScrollerContent]:!border-0"
+          rows={rows || []}
+          columns={columns}
+          loading={isLoading}
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 5,
+              },
+            },
+          }}
+          //   hideFooter={true}
+          pageSizeOptions={[5]}
+          //   checkboxSelection
+          disableRowSelectionOnClick
+          // [&_.MuiDataGrid-cell]:!border-0
+          // [&_.MuiDataGrid-columnHeaders]:!border-0"
+          sx={{
+            flex: 1,
+            border: "none",
+            fontSize: { xs: "0.75rem", sm: "0.875rem" },
+            "& .MuiDataGrid-columnSeparator": {
+              display: "none",
+            },
+            "& .MuiDataGrid-cell": {
+              border: "none",
+              padding: { xs: "8px 4px", sm: "12px 8px" },
+            },
+            "& .MuiDataGrid-columnHeaders": {
+              fontSize: { xs: "0.75rem", sm: "0.875rem" },
+            },
+          }}
+        />
+      </Box>
+    </div>
+  );
+};
+
+export default TableData;
