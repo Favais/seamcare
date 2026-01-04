@@ -1,3 +1,4 @@
+"use client";
 import { Eye, Download, Paperclip, Grid, List } from "lucide-react";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
@@ -13,6 +14,9 @@ import {
   TableRow,
 } from "../ui/table";
 import UploadDoc from "../UploadDoc";
+import { useAppContext } from "@/context/AppContext";
+import { useSession } from "next-auth/react";
+import { useDocument } from "@/hooks/useDocument";
 
 const mockDocuments = [
   {
@@ -74,22 +78,41 @@ const mockDocuments = [
 ];
 
 const categoryConfig = {
-  "lab-results": {
-    label: "Lab Results",
-    color: "bg-green-100 text-green-800 border-green-200",
-  },
   prescription: {
     label: "Prescription",
     color: "bg-blue-100 text-blue-800 border-blue-200",
   },
-  referral: {
-    label: "Referral",
+
+  labResults: {
+    label: "Lab Results",
+    color: "bg-green-100 text-green-800 border-green-200",
+  },
+
+  xRay: {
+    label: "X-Ray",
+    color: "bg-indigo-100 text-indigo-800 border-indigo-200",
+  },
+
+  mri: {
+    label: "MRI",
     color: "bg-purple-100 text-purple-800 border-purple-200",
   },
-  "consultation-notes": {
+
+  ctScan: {
+    label: "CT Scan",
+    color: "bg-cyan-100 text-cyan-800 border-cyan-200",
+  },
+
+  referral: {
+    label: "Referral",
+    color: "bg-yellow-100 text-yellow-800 border-yellow-200",
+  },
+
+  notes: {
     label: "Notes",
     color: "bg-orange-100 text-orange-800 border-orange-200",
   },
+
   imaging: {
     label: "Imaging",
     color: "bg-gray-100 text-gray-800 border-gray-200",
@@ -104,6 +127,10 @@ const statusConfig = {
 
 export function DocumentTable() {
   const [viewMode, setViewMode] = useState("list");
+  //   const { data: session } = useSession();
+
+  const { data, isLoading, error } = useDocument();
+  console.log(data);
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString("en-US", {
@@ -124,7 +151,7 @@ export function DocumentTable() {
             </p>
           </div>
           <div className="flex items-center gap-2">
-            <UploadDoc />
+            <UploadDoc currentUserId={"69272b89e14e6b96951c7e9e"} />
             <Button
               variant={viewMode === "list" ? "default" : "outline"}
               size="sm"
@@ -173,8 +200,8 @@ export function DocumentTable() {
                     {doc.documentName}
                   </h4>
                   <div className="flex items-center gap-2 mb-2">
-                    <Badge className={categoryConfig[doc.category].color}>
-                      {categoryConfig[doc.category].label}
+                    <Badge className={categoryConfig[doc?.category]?.color}>
+                      {categoryConfig[doc?.category]?.label}
                     </Badge>
                     {doc.status && (
                       <Badge
@@ -267,8 +294,8 @@ export function DocumentTable() {
               </TableRow>
             </TableHeader>
             <TableBody className="divide-y divide-gray-200">
-              {mockDocuments.map((doc) => (
-                <TableRow key={doc.id} className="hover:bg-gray-50">
+              {data?.map((doc) => (
+                <TableRow key={doc.publicId} className="hover:bg-gray-50">
                   <TableCell className="px-6 py-4">
                     <div className="flex items-center gap-3">
                       <Avatar className="h-8 w-8">
@@ -277,10 +304,7 @@ export function DocumentTable() {
                           alt={doc.patientName}
                         />
                         <AvatarFallback className="text-xs">
-                          {doc.patientName
-                            .split(" ")
-                            .map((n) => n[0])
-                            .join("")}
+                          {`${doc.patientId.firstName.charAt(0)}${doc.patientId.lastName.charAt(0)}`}
                         </AvatarFallback>
                       </Avatar>
                       <span className="text-gray-900">{doc.patientName}</span>
@@ -288,7 +312,7 @@ export function DocumentTable() {
                   </TableCell>
                   <TableCell className="px-6 py-4">
                     <div className="flex items-center gap-2">
-                      <span className="text-gray-900">{doc.documentName}</span>
+                      <span className="text-gray-900">{doc.fileName}</span>
                       {doc.isShared && (
                         <Badge variant="outline" className="text-xs">
                           Shared
@@ -297,15 +321,17 @@ export function DocumentTable() {
                     </div>
                   </TableCell>
                   <TableCell className="px-6 py-4">
-                    <Badge className={categoryConfig[doc.category].color}>
-                      {categoryConfig[doc.category].label}
+                    <Badge
+                      className={categoryConfig[doc?.fileType]?.color ?? ""}
+                    >
+                      {categoryConfig[doc?.fileType]?.label ?? "pending"}
                     </Badge>
                   </TableCell>
                   <TableCell className="px-6 py-4 text-gray-600">
-                    {doc.uploadedBy}
+                    {doc.uploadedBy.firstName} {doc.uploadedBy.lastName}
                   </TableCell>
                   <TableCell className="px-6 py-4 text-gray-600">
-                    {formatDate(doc.uploadDate)}
+                    {formatDate(doc.createdAt)}
                   </TableCell>
                   <TableCell className="px-6 py-4">
                     {doc.status && (
