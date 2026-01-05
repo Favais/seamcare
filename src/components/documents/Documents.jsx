@@ -328,7 +328,7 @@ export function DocumentTable() {
                     </Badge>
                   </TableCell>
                   <TableCell className="px-6 py-4 text-gray-600">
-                    {doc.uploadedBy.firstName} {doc.uploadedBy.lastName}
+                    {`Dr. ${doc.uploadedBy.lastName}`}
                   </TableCell>
                   <TableCell className="px-6 py-4 text-gray-600">
                     {formatDate(doc.createdAt)}
