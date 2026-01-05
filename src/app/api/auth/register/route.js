@@ -8,7 +8,6 @@ import { registerSchema } from "@/schemas/registerSchema";
 import { hashPassword } from "@/utils/auth";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
-import { he } from "zod/v4/locales";
 
 connectDB();
 
@@ -16,7 +15,7 @@ export const POST = async (request) => {
   const ip =
     headers().get("x-forwarded-for") ?? headers().get("x-real-ip") ?? "Unknown";
 
-  const { success } = authRateLimit(ip);
+  const { success } = await authRateLimit.limit(ip);
   if (!success) {
     return NextResponse.json(
       { message: "Too many requests. Please try again later." },

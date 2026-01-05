@@ -57,7 +57,7 @@ const PatientsTable = ({ handleViewPatient, patients }) => {
   return (
     <Card className="flex flex-col bg-white rounded-lg sm:rounded-2xl min-h-0 h-full">
       <CardHeader className="px-3 sm:px-4 pb-0 border-b-0">
-        <CardTitle className="flex justify-between text-base sm:text-lg">
+        <CardTitle className="flex flex-col gap-2 md:flex-row justify-between text-base sm:text-lg">
           <div>
             <h1 className="text-xl sm:text-2xl font-semibold">
               {" "}

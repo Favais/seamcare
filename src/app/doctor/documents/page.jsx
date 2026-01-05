@@ -10,7 +10,7 @@ import React from "react";
 
 const page = () => {
   return (
-    <div className="py-2 sm:py-3 px-2 sm:px-4 flex flex-col min-h-screen">
+    <div className="py-3 sm:py-3 px-2 sm:px-4 flex flex-col min-h-screen">
       {/* <header className="bg-white border-b border-gray-200 px-3 sm:px-6 py-2 sm:py-4 rounded-lg mb-3 sm:mb-4">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>

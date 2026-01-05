@@ -157,7 +157,7 @@ const TableData = () => {
         <DataGrid
           className="px-2 sm:px-4 text-xs sm:text-sm
                     [&_.MuiDataGrid-virtualScrollerContent]:!border-0"
-          rows={rows || []}
+          rows={appointments || []}
           columns={columns}
           loading={isLoading}
           initialState={{

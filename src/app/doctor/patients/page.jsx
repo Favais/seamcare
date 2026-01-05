@@ -4,7 +4,7 @@ import React from "react";
 
 const page = () => {
   return (
-    <div className="py-2 sm:py-3 px-2 sm:px-4 flex flex-col h-screen overflow-hidden">
+    <div className="py-3 sm:py-3 px-2 sm:px-4 flex flex-col h-screen overflow-hidden">
       <Header />
       <Patients />
     </div>
