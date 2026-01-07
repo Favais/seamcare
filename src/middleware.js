@@ -5,11 +5,6 @@ export default withAuth(
   function middleware(req) {
     const user = req.nextauth.token;
     const pathname = req.nextUrl.pathname;
-    console.log("Middleware executing:", {
-      user: user?.email,
-      role: user?.role,
-      pathname,
-    });
 
     // 1. Redirect logged-in users away from login page to their dashboard
     if (pathname === "/login" && user?.role) {
@@ -46,22 +41,13 @@ export default withAuth(
   },
   {
     callbacks: {
-      authorized: ({ token, req }) => {
-        const pathname = req.nextUrl.pathname;
-        console.log(pathname);
-
-        if (pathname === "/login" || pathname === "/register") {
-          return true;
-        }
-        return !!token;
+      pages: {
+        signIn: "/login",
       },
-    },
-    pages: {
-      signIn: "/login",
     },
   }
 );
 
 export const config = {
-  matcher: ["/doctor/:path*", "/patient/:path*", "/login", "/register"],
+  matcher: ["/doctor/:path*", "/patient/:path*"],
 };
