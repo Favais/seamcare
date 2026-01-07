@@ -10,7 +10,7 @@ export default function DashboardShell({ children }) {
     <div className="flex h-full">
       <Sidebar />
       <main
-        className={`bg-neutral-100 flex-1 h-full overflow-auto lg:rounded-2xl
+        className={`bg-background flex-1 h-full overflow-auto lg:rounded-2xl
           transition-all duration-300
           ${isOpen ? "ml-32 md:ml-40 lg:ml-50" : "ml-12 md:ml-16 lg:ml-20"}
         `}

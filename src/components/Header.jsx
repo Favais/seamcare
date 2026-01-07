@@ -10,7 +10,7 @@ import { Bell, Search, Settings } from "lucide-react";
 const Header = ({ value, setValue, isSearch, title, subtitle }) => {
   const { data: session } = useSession();
   return (
-    <div className="flex md:flex-col sm:px-3 py-2 sm:flex-row justify-between h-fit gap-4 sm:gap-0 items-center bg-white rounded-lg mb-3 border-b border-gray-200">
+    <div className="flex sm:px-3 py-2 sm:flex-row justify-between h-fit gap-4 sm:gap-0 items-center bg-card rounded-lg mb-3 border-b border-gray-200">
       <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 items-start sm:items-center w-full sm:w-auto">
         <div className="p-2">
           <h1 className="font-semibold text-sm md:text-lg text-gray-900">
